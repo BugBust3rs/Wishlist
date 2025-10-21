@@ -25,10 +25,7 @@ public class WishListRepository {
         this.jdbcTemplate = jdbcTemplate;
 
     }
-    public User getUser(String name){
-        return new User();
-    }
-
+    
     public void addWish(Wish wish){
         String sql = "INSERT INTO WishList (userId, name, description, price, link, isReserved) VALUES (?, ?, ?, ?, ?, ?)";
 
