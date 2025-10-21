@@ -4,11 +4,11 @@ public class User {
     private int id;
     private String name;
     private String email;
-    private String Password;
+    private String password;
 
     public User(int id, String password, String email, String name) {
         this.id = id;
-        Password = password;
+        this.password = password;
         this.email = email;
         this.name = name;
     }
@@ -40,10 +40,10 @@ public class User {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 }
