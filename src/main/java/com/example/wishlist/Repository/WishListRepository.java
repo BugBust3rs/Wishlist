@@ -1,5 +1,6 @@
 package com.example.wishlist.Repository;
 
+import com.example.wishlist.Model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,10 @@ public class WishListRepository {
 
     public WishListRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
 
+    public void createUser(User user){
+        String sql = "INSERT INTO User (name, email, password) VALUES (?,?,?)";
+        jdbcTemplate.update(sql,user.getName(),user.getEmail(),user.getPassword());
     }
 }
