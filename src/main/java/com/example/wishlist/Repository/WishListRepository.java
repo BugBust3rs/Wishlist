@@ -32,6 +32,6 @@ public class WishListRepository {
     public void addWish(Wish wish){
         String sql = "INSERT INTO WishList (userId, name, description, price, link, isReserved) VALUES (?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(sql,  )
+        jdbcTemplate.update(sql, wish.getUserId(), wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink(), wish.getReserved());
     }
 }
