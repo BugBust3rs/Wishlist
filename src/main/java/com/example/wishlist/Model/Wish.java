@@ -7,7 +7,7 @@ public class Wish {
     private String description;
     private double price;
     private String link;
-    private  Boolean isReverved;
+    private  Boolean isReserved;
 
     public Wish(int id, int userId, String name, String description, double price, String link, Boolean isReverved){
         this.id = id;
@@ -16,7 +16,7 @@ public class Wish {
         this.description = description;
         this.price = price;
         this.link = link;
-        this.isReverved = isReverved;
+        this.isReserved = isReverved;
     }
 
     public Wish(){}
@@ -69,11 +69,11 @@ public class Wish {
         this.link = link;
     }
 
-    public Boolean getReverved() {
-        return isReverved;
+    public Boolean getReserved() {
+        return isReserved;
     }
 
-    public void setReverved(Boolean reverved) {
-        isReverved = reverved;
+    public void setReserved(Boolean reverved) {
+        isReserved = reverved;
     }
 }
