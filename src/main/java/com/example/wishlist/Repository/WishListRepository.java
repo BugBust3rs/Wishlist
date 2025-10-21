@@ -11,6 +11,6 @@ public class WishListRepository {
     }
 
     public Wish addWish(Wish wish){
-        return new Wish();
+        String sql = "INSERT INTO WishList ()";
     }
 }
