@@ -25,7 +25,7 @@ public class WishListRepository {
     }
 
     public void createUser(User user){
-        String sql = "INSERT INTO User (name, email, password)";
+        String sql = "INSERT INTO User (name, email, password) VALUES (?,?,?)";
         jdbcTemplate.update(sql,user.getName(),user.getEmail(),user.getPassword());
     }
 }
