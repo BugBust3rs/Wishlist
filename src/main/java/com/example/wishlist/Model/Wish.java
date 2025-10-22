@@ -16,7 +16,7 @@ public class Wish {
         this.description = description;
         this.price = price;
         this.link = link;
-        this.isReserved = isReverved;
+        this.isReserved = isReserved;
     }
 
     public Wish(){}
