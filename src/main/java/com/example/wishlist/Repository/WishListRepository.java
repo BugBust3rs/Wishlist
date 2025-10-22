@@ -52,4 +52,10 @@ public class WishListRepository {
            return user;
         });
     }
+
+    public void deleteWish(int id){
+
+        String SQL = "DELETE FROM Wish WHERE wish_id = ?";
+        jdbcTemplate.update(SQL, id);
+    }
 }
