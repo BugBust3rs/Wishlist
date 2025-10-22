@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class WishListRepository {
 
@@ -35,5 +40,30 @@ public class WishListRepository {
     public void createUser(User user){
         String sql = "INSERT INTO User (name, email, password) VALUES (?,?,?)";
         jdbcTemplate.update(sql,user.getName(),user.getEmail(),user.getPassword());
+    }
+
+    public List<User> getUsers(){
+        final String sql = """
+                SELECT
+                ta.id       AS ta_id,
+                ta.email    AS ta_email
+                FROM USER ta
+                ORDER BY ta.id
+                """;
+
+        return jdbcTemplate.query(sql, rs -> {
+            Map<Integer, User> byId = new HashMap<>();
+            while(rs.next()){
+                int id = rs.getInt("ta_id");
+                User ta = byId.get(id);
+                if (ta == null){
+                    ta = new User();
+                    ta.setId(id);
+                    ta.setEmail(rs.getString("ta_name"));
+                    byId.put(id,ta);
+                }
+            }
+            return new ArrayList<>(byId.values());
+        });
     }
 }
