@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Repository
 public class WishListRepository {
@@ -34,27 +32,21 @@ public class WishListRepository {
     }
 
     public List<User> getUsers(){
-        final String sql = """
-                SELECT
-                ta.id       AS ta_id,
-                ta.email    AS ta_email
-                FROM USER ta
-                ORDER BY ta.id
-                """;
+        final String sql = "SELECT * FROM USER";
 
-        return jdbcTemplate.query(sql, rs -> {
-            Map<Integer, User> byId = new HashMap<>();
-            while(rs.next()){
-                int id = rs.getInt("ta_id");
-                User ta = byId.get(id);
-                if (ta == null){
-                    ta = new User();
-                    ta.setId(id);
-                    ta.setEmail(rs.getString("ta_name"));
-                    byId.put(id,ta);
-                }
-            }
-            return new ArrayList<>(byId.values());
+        return jdbcTemplate.query(sql, (rs, rownum)  -> {
+           User user = new User();
+           user.setId(rs.getInt("user_id"));
+           user.setName(rs.getString("name"));
+           user.setPassword(rs.getString("password"));
+           user.setEmail(rs.getString("email"));
+           return user;
         });
+    }
+
+    public void deleteWish(int id){
+
+        String SQL = "DELETE FROM Wish WHERE wish_id = ?";
+        jdbcTemplate.update(SQL, id);
     }
 }
