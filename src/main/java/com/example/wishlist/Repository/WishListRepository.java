@@ -66,4 +66,24 @@ public class WishListRepository {
         });
 
     }
+    public void updateWish(Wish wish){
+        String sql = """
+                UPDATE Wish 
+                SET name = ?, 
+                description = ?,  
+                price = ?, 
+                link = ?, 
+                isReserved = ? 
+                WHERE wish_id = ?
+                """;
+        jdbcTemplate.update(sql,
+                wish.getName(),
+                wish.getDescription(),
+                wish.getPrice(),
+                wish.getLink(),
+                wish.getReserved(),
+                wish.getId());
+
+    }
+
 }
