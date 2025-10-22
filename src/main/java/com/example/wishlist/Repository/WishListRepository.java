@@ -66,4 +66,21 @@ public class WishListRepository {
             return new ArrayList<>(byId.values());
         });
     }
+
+    public List<Wish> getWishes() {
+        final String sql = "SELECT * FROM Wish";
+
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Wish wish = new Wish();
+            wish.setId(rs.getInt("id"));
+            wish.setUserId(rs.getInt("user_id"));
+            wish.setName(rs.getString("name"));
+            wish.setDescription(rs.getString("description"));
+            wish.setPrice(rs.getDouble("price"));
+            wish.setLink(rs.getString("link"));
+            wish.setReserved(rs.getBoolean("isReserved"));
+            return wish;
+        });
+
+    }
 }
