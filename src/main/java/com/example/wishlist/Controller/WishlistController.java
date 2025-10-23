@@ -3,11 +3,10 @@ package com.example.wishlist.Controller;
 import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Service.WishlistService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -23,13 +22,21 @@ public class WishlistController {
         this.service = service;
     }
 
-    @GetMapping("/{id}/wishes")
-    public String getWishes(@PathVariable int id, Model model) {
-        List<Wish> wishes = service.getWishes();
-        model.addAttribute("wishes", wishes);
-        User user = service.getUser( id);
+    @GetMapping("/wishes")
+    public String getWishes(HttpSession session, Model model) {
+
+        int userId = session.getAttribute("user").getId();
+        User user = service.getUser( userId);
         model.addAttribute("user", user);
+        List<Wish> wishes = service.getWishes(userId);
+        model.addAttribute("wishes", wishes);
         return "wishlist";
+    }
+
+    @PostMapping("/{wishId}/wishes")
+    public String deleteWish(@PathVariable int wishId){
+        service.deleteWish(wishId);
+        return "redirect:/{id}/wishes";
     }
 
 

@@ -13,12 +13,14 @@ import java.util.List;
 public class WishlistService {
 
     private final WishListRepository repository;
+    private final WishListRepository wishListRepository;
 
-    public WishlistService(WishListRepository repository){
+    public WishlistService(WishListRepository repository, WishListRepository wishListRepository){
         this.repository = repository;
+        this.wishListRepository = wishListRepository;
     }
 
-    public List<Wish> getWishes() {
+    public List<Wish> getWishes(int id) {
         return repository.getWishes();
     }
 
@@ -30,5 +32,9 @@ public class WishlistService {
             }
         }
         return null;
+    }
+
+    public void deleteWish(int id){
+     wishListRepository.deleteWish(id);
     }
 }
