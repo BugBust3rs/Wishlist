@@ -22,13 +22,5 @@ public class WishlistService {
         return repository.getWishes();
     }
 
-    public User getUser(int id) {
-        List<User> users = repository.getUsers();
-        for(User user : users){
-            if(user.getId() == id){
-                return user;
-            }
-        }
-        return null;
-    }
+
 }
