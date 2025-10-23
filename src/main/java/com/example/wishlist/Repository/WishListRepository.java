@@ -26,23 +26,7 @@ public class WishListRepository {
         jdbcTemplate.update(sql, wish.getUserId(), wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink(), wish.getReserved());
     }
 
-    public void createUser(User user){
-        String sql = "INSERT INTO User (name, email, password) VALUES (?,?,?)";
-        jdbcTemplate.update(sql,user.getName(),user.getEmail(),user.getPassword());
-    }
 
-    public List<User> getUsers(){
-        final String sql = "SELECT * FROM USER";
-
-        return jdbcTemplate.query(sql, (rs, rownum)  -> {
-           User user = new User();
-           user.setId(rs.getInt("user_id"));
-           user.setName(rs.getString("name"));
-           user.setPassword(rs.getString("password"));
-           user.setEmail(rs.getString("email"));
-           return user;
-        });
-    }
 
     public void deleteWish(int id){
 

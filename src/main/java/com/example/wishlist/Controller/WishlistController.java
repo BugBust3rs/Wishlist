@@ -2,6 +2,7 @@ package com.example.wishlist.Controller;
 
 import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
+import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,25 @@ import java.util.List;
 @Controller
 public class WishlistController {
 
-    private final WishlistService service;
+    private final WishlistService wishlistService;
+    private final UserService userService;
 
-    public WishlistController(WishlistService service){
-        this.service = service;
+    public WishlistController(WishlistService wishlistService, UserService userService) {
+        this.wishlistService = wishlistService;
+        this.userService = userService;
+    }
+
+    @PostMapping("login")
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("pw") String pw,
+                        Model model, HttpSession session) {
+        User user = userService.login(email, pw);
+        if (user != null) {
+            session.setAttribute("user", user);
+            return "redirect:/wishes";
+        }
+        return "login";
+
     }
 
     @GetMapping("/wishes")

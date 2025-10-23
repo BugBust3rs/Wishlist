@@ -13,28 +13,14 @@ import java.util.List;
 public class WishlistService {
 
     private final WishListRepository repository;
-    private final WishListRepository wishListRepository;
 
-    public WishlistService(WishListRepository repository, WishListRepository wishListRepository){
+    public WishlistService(WishListRepository repository){
         this.repository = repository;
-        this.wishListRepository = wishListRepository;
     }
 
     public List<Wish> getWishes(int id) {
         return repository.getWishes();
     }
 
-    public User getUser(int id) {
-        List<User> users = repository.getUsers();
-        for(User user : users){
-            if(user.getId() == id){
-                return user;
-            }
-        }
-        return null;
-    }
 
-    public void deleteWish(int id){
-     wishListRepository.deleteWish(id);
-    }
 }
