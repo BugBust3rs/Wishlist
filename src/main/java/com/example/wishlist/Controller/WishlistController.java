@@ -6,6 +6,7 @@ import com.example.wishlist.Service.WishlistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,11 +23,13 @@ public class WishlistController {
         this.service = service;
     }
 
-    @GetMapping
-    public String getWishes(Model model) {
+    @GetMapping("/{id}/wishes")
+    public String getWishes(@PathVariable int id, Model model) {
         List<Wish> wishes = service.getWishes();
         model.addAttribute("wishes", wishes);
-        return "redirect:/";
+        User user = service.getUser( id);
+        model.addAttribute("user", user);
+        return "wishlist";
     }
 
 

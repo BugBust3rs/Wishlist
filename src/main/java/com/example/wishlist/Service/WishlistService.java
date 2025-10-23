@@ -6,6 +6,8 @@ import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Repository.WishListRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class WishlistService {
@@ -17,5 +19,16 @@ public class WishlistService {
     }
 
     public List<Wish> getWishes() {
+        return repository.getWishes();
+    }
+
+    public User getUser(int id) {
+        List<User> users = repository.getUsers();
+        for(User user : users){
+            if(user.getId() == id){
+                return user;
+            }
+        }
+        return null;
     }
 }
