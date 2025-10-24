@@ -4,7 +4,6 @@ import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,30 +27,27 @@ public class WishlistController {
     @PostMapping("login")
     public String login(@RequestParam("email") String email,
                         @RequestParam("pw") String pw,
-                        Model model, HttpSession session) {
+                        Model model) {
         User user = userService.login(email, pw);
         if (user != null) {
-            session.setAttribute("user", user);
-            return "redirect:/wishes";
+            return "redirect:/wishes/" + user.getId() ;
         }
         return "login";
 
     }
 
-    @GetMapping("/wishes")
-    public String getWishes(HttpSession session, Model model) {
-
-        int userId = session.getAttribute("user").getId();
-        User user = service.getUser( userId);
+    @GetMapping("/wishes/{userId}")
+    public String getWishes(@PathVariable int userId, Model model) {
+        User user = userService.getUser(userId);
         model.addAttribute("user", user);
-        List<Wish> wishes = service.getWishes(userId);
+        List<Wish> wishes = wishlistService.getWishesFromUser(userId);
         model.addAttribute("wishes", wishes);
         return "wishlist";
     }
 
     @PostMapping("/{wishId}/wishes")
     public String deleteWish(@PathVariable int wishId){
-        service.deleteWish(wishId);
+        wishlistService.deleteWish(wishId);
         return "redirect:/{id}/wishes";
     }
 
