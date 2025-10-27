@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link th:href="@{/main.css}" rel="stylesheet">
+</head>
+<body>
+<h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
+<form th:action="@{/}" th:object="user" >
+  <button type="submit">Tilføj et Ønske</button>
+</form>
+
+<div>
+  <h1 th:text=""></h1>
+</div>
+</body>
+</html>

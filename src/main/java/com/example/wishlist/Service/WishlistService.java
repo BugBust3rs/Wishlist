@@ -35,4 +35,8 @@ public class WishlistService {
     public void deleteWish(int wishId) {
 
     }
+
+    public void saveWish(Wish wish ){
+        repository.addWish(wish);
+    }
 }
