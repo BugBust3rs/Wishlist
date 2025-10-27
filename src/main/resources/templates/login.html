@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Wishlist</title>
     <link th:href="@{/main.css}" rel="stylesheet">
 </head>
 <body>
+<form action="#" th:action="@{/entrance}" th:object="${user}" method="post">
+    <label>Email:
+        <input th:required="required" type="text" th:field="*{email}"/>
+    </label>
+    <br/>
+    <label>Password:
+        <input th:required="required" type="text" th:field="*{password}"/>
+    </label>
+    </form>
+
+
+</form>
 
 </body>
 </html>
