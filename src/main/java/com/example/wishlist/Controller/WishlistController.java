@@ -25,7 +25,7 @@ public class WishlistController {
         this.userService = userService;
     }
 
-    @PostMapping("login")
+    @PostMapping("entrance")
     public String login(@RequestParam("email") String email,
                         @RequestParam("pw") String pw,
                         Model model, HttpSession session) {
@@ -34,8 +34,15 @@ public class WishlistController {
             session.setAttribute("user", user);
             return "redirect:/wishes";
         }
-        return "login";
+        return "redirect:/login";
 
+    }
+
+    @GetMapping("login")
+    public String login(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "login";
     }
 
     @GetMapping("/wishes")
