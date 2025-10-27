@@ -7,6 +7,9 @@
 </head>
 <body>
 <h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
+<form th:action="@{/add}">
+    <button type="submit">Tilføj et Ønske</button>
+</form>
 
 <div>
     <h1 th:text=""></h1>
