@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WishHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<header>
+    <div class="logo">☁️ WishHub</div>
+</header>
+<body>
+<div class="container">
+    <button class="close-btn" onclick="window.location.href='/login'">&times;</button>
+
+    <h1>
+        Opret en profil
+    </h1>
+<form action="#" th:action="@{/createUser}" th:object="${user}" method="post">
+    <table>
+        <tr>
+            <td>
+                Navn:
+            </td>
+            <td>
+                <input type="text" placeholder="Navn" th:field="*{name}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email:
+            </td>
+            <td>
+                <input type="email" placeholder="Email">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Adgangskode:
+            </td>
+            <td>
+                <input type="password" placeholder="Adgangskode">
+            </td>
+        </tr>
+
+
+    </table>
+    <button type="submit" class="button">Opret</button>
+</form>
+</div>
+</body>
+</html>

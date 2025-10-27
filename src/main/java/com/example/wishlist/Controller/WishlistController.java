@@ -1,10 +1,15 @@
 package com.example.wishlist.Controller;
 
 import com.example.wishlist.Model.User;
+import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +29,7 @@ public class WishlistController {
         this.userService = userService;
     }
 
-    @PostMapping("login")
+    @PostMapping("entrance")
     public String login(@RequestParam("email") String email,
                         @RequestParam("pw") String pw,
                         Model model) {
@@ -32,8 +37,15 @@ public class WishlistController {
         if (user != null) {
             return "redirect:/wishes/" + user.getId() ;
         }
-        return "login";
+        return "redirect:/login";
 
+    }
+
+    @GetMapping("login")
+    public String login(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "login";
     }
 
     @GetMapping("/wishes/{userId}")
@@ -45,6 +57,13 @@ public class WishlistController {
         return "wishlist";
     }
 
+    @GetMapping("/createUser")
+    public String showCreateUser(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "createUser";
+    }
+
     @PostMapping("/{wishId}/wishes")
     public String deleteWish(@PathVariable int wishId){
         wishlistService.deleteWish(wishId);
@@ -53,10 +72,10 @@ public class WishlistController {
  // Du skal lave postmapping der tjekker om brugeren allerede eksistere,
     // hvis den gør, så får man en fejlmeddelse og hvis ikke, så viderestilles man til login-siden
 
-    @PostMapping("/{userId}/user")
-    public String createUser(@PathVariable int userId){
-       if(userId : us)
-        userService
-    }
+//    @PostMapping("/{userId}/user")
+//    public String createUser(@PathVariable int userId){
+//       if(userId : us)
+//        userService
+//    }
 
 }

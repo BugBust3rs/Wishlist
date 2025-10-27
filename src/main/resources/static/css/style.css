@@ -1,0 +1,147 @@
+/* Krop og baggrund */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #a7d8f8, #f5f9fc); /* rolig himmelblå gradient */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 80px;
+}
+
+/* Header */
+header {
+    background-color: #5da9e9; /* ny blød himmelblå */
+    color: white;
+    padding: 15px 30px;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.logo {
+    font-family: 'Trebuchet MS', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Formular-boks */
+.container {
+    position: relative;
+    background-color: #ffffff;
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    width: 350px;
+    margin-top: 140px;
+}
+
+/* Luk-knap (kryds) */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #888;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: #1c4e80; /* mørkere blå ved hover */
+}
+
+/* Overskrift */
+h1 {
+    text-align: center;
+    color: #1c4e80;
+    margin-bottom: 25px;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+}
+
+td {
+    padding: 10px 5px;
+}
+
+/* Inputfelter */
+input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #c8d9eb; /* blød blågrå */
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus {
+    border-color: #5da9e9;
+    box-shadow: 0 0 8px rgba(93,169,233,0.3);
+}
+
+/* Knapper */
+button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+button.submit-btn {
+    background-color: #5da9e9;
+    color: white;
+    margin-top: 15px;
+    width: 100%;
+}
+
+button.submit-btn:hover {
+    background-color: #1c4e80;
+}
+
+/* Ekstra tekst */
+.container p {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 15px;
+}
+
+/* "Opret profil" knap med tryk-effekt */
+.button {
+    padding: 12px 25px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #5da9e9; /* himmelblå */
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 6px #3b82c4; /* mørkere blå skygge */
+    transition: 0.2s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: #1c4e80; /* lidt mørkere ved hover */
+}
+
+.button:active {
+    background-color: #1c4e80;
+    box-shadow: 0 3px #2b3e5b;
+    transform: translateY(3px);
+}
+
