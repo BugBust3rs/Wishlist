@@ -50,6 +50,13 @@ public class WishlistController {
         wishlistService.deleteWish(wishId);
         return "redirect:/{id}/wishes";
     }
+ // Du skal lave postmapping der tjekker om brugeren allerede eksistere,
+    // hvis den gør, så får man en fejlmeddelse og hvis ikke, så viderestilles man til login-siden
 
+    @PostMapping("/{userId}/user")
+    public String createUser(@PathVariable int userId){
+       if(userId : us)
+        userService
+    }
 
 }
