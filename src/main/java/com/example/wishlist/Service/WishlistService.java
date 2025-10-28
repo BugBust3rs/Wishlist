@@ -32,18 +32,23 @@ public class WishlistService {
 
 
     public Wish deleteWish(int wishId) {
-        List<Wish> wishes = repository.getWishes();
-        Wish w = new Wish();
-        for (Wish wish : wishes){
-            if (wish.getId() == wishId){
-                w.setUserId(wish.getUserId());
-            }
-        }
+        Wish w = getWishFromWishId(wishId);
+
         repository.deleteWish(wishId);
         return w;
     }
 
     public void saveWish(Wish wish) {
         repository.addWish(wish);
+    }
+
+    public Wish getWishFromWishId(int wishId) {
+        List<Wish> wishes = repository.getWishes();
+        for (Wish wish : wishes){
+            if (wish.getId() == wishId){
+                return wish;
+            }
+        }
+        return null;
     }
 }

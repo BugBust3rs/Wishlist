@@ -17,12 +17,17 @@
             <div>
                 <h2 th:text="${wish.name}"></h2>
                 <p th:text="${wish.description}"></p>
-                <p th:text="'Pris: ' + ${wish.price}"></p>
+                <p th:text="${wish.price} + ' dkk'"></p>
                 <a th:href="${wish.link}" th:text="${wish.link}"></a>
             </div>
-            <form  th:action="@{/deleteWish/{wishId}(wishId=${wish.id})}">
-                <button class="delete-button">Slet</button>
-            </form>
+            <div class="button-group">
+                <form th:action="@{/deleteWish/{wishId}(wishId=${wish.id})}">
+                    <button class="delete-button" type="submit">Slet</button>
+                </form>
+                <form th:action="@{/updateWish/{wishId}(wishId=${wish.id})}">
+                    <button class="rediger-button" type="submit">Rediger</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

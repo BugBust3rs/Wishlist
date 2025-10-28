@@ -163,7 +163,7 @@ button.submit-btn:hover {
 }
 
 .wish {
-    flex: 1 1 250px; /* responsive boxes — each takes up min 250px */
+    flex: 1 1 100px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
@@ -200,6 +200,34 @@ button.submit-btn:hover {
     background-color: #1c4e80; /* lidt mørkere ved hover */
 }
 
-.delete-button {
-    background-color: red;
+button.delete-button {
+    background-color: #F44336;
+    border-radius: 5px;
+    margin: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 80px;
+}
+
+button.delete-button:hover {
+    background-color: #D32F2F;
+}
+
+button.rediger-button {
+    background-color: #5da9e9;
+    border-radius: 5px;
+    margin: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 80px;
+}
+
+button.rediger-button:hover {
+    background-color: #2d6fab;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* centers them horizontally */
+    gap: 10px; /* space between buttons */
 }
