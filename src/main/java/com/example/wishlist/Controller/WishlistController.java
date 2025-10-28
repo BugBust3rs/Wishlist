@@ -5,7 +5,6 @@ import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +32,10 @@ public class WishlistController {
     @PostMapping("entrance")
     public String login(@RequestParam("email") String email,
                         @RequestParam("pw") String pw,
-                        Model model, HttpSession session) {
+                        Model model) {
         User user = userService.login(email, pw);
         if (user != null) {
-            session.setAttribute("user", user);
-            return "redirect:/wishes";
+            return "redirect:/wishes/" + user.getId() ;
         }
         return "redirect:/login";
 
@@ -50,12 +48,12 @@ public class WishlistController {
         return "login";
     }
 
-    @GetMapping("/wishes")
-    public String getWishes(@PathVariable int id, Model model) {
-        List<Wish> wishes = wishlistService.getWishes();
-        model.addAttribute("wishes", wishes);
-        User user = userService.getUser(id);
+    @GetMapping("/wishes/{userId}")
+    public String getWishes(@PathVariable int userId, Model model) {
+        User user = userService.getUser(userId);
         model.addAttribute("user", user);
+        List<Wish> wishes = wishlistService.getWishesFromUser(userId);
+        model.addAttribute("wishes", wishes);
         return "wishlist";
     }
 
@@ -66,5 +64,25 @@ public class WishlistController {
         return "createUser";
     }
 
+    @PostMapping("/{wishId}/wishes")
+    public String deleteWish(@PathVariable int wishId){
+        wishlistService.deleteWish(wishId);
+        return "redirect:/{id}/wishes";
+    }
+
+
+ // Du skal lave postmapping der tjekker om brugeren allerede eksistere,
+    // hvis den gør, så får man en fejlmeddelse og hvis ikke, så viderestilles man til login-siden
+
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute User user) {
+        if (userService.doesUserExists(user.getEmail())){
+            return "redirect:/createUser";
+        }
+        userService.createUser(user);
+
+        return "redirect:/login";
+
+    }
 
 }
