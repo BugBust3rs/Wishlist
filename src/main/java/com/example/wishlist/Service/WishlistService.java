@@ -15,28 +15,35 @@ public class WishlistService {
 
     private final WishListRepository repository;
 
-    public WishlistService(WishListRepository repository){
+    public WishlistService(WishListRepository repository) {
         this.repository = repository;
     }
 
     public List<Wish> getWishesFromUser(int userId) {
-        ArrayList<Wish> wishList = new ArrayList<>();
-        ArrayList<Wish> userWishList = new ArrayList<>();
-        for(Wish wish: wishList){
-            if(wish.getUserId() == userId){
-            userWishList.add(wish);
+        List<Wish> wishList = repository.getWishes();
+        List<Wish> userWishList = new ArrayList<>();
+        for (Wish wish : wishList) {
+            if (wish.getUserId() == userId) {
+                userWishList.add(wish);
             }
         }
         return userWishList;
     }
 
 
-
-    public void deleteWish(int wishId) {
-
+    public Wish deleteWish(int wishId) {
+        List<Wish> wishes = repository.getWishes();
+        Wish w = new Wish();
+        for (Wish wish : wishes){
+            if (wish.getId() == wishId){
+                w.setUserId(wish.getUserId());
+            }
+        }
+        repository.deleteWish(wishId);
+        return w;
     }
 
-    public void saveWish(Wish wish ){
+    public void saveWish(Wish wish) {
         repository.addWish(wish);
     }
 }

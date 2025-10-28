@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/main.css}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
-<form th:action="@{/addWish/{userId}(userId=${user.getId()})}">
-    <button type="submit">Tilføj et Ønske</button>
-</form>
+<div class="main-content">
+    <h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
+    <form th:action="@{/addWish/{userId}(userId=${user.getId()})}">
+        <button type="submit" class="wish-button">Tilføj et Ønske</button>
+    </form>
 
-<div>
-    <h1 th:text=""></h1>
+    <div class="wishes-container">
+        <div th:each="wish : ${wishes}" class="wish">
+            <div>
+                <h2 th:text="${wish.name}"></h2>
+                <p th:text="${wish.description}"></p>
+                <p th:text="'Pris: ' + ${wish.price}"></p>
+                <a th:href="${wish.link}" th:text="${wish.link}"></a>
+            </div>
+            <form  th:action="@{/deleteWish/{wishId}(wishId=${wish.id})}">
+                <button class="delete-button">Slet</button>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

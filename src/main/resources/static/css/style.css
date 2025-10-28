@@ -65,6 +65,11 @@ h1 {
     margin-bottom: 25px;
 }
 
+h2 {
+    text-align: center;
+    color: #1c4e80;
+}
+
 /* Tabel */
 table {
     width: 100%;
@@ -145,3 +150,56 @@ button.submit-btn:hover {
     transform: translateY(3px);
 }
 
+.wishes-container {
+    display: flex;
+    flex-wrap: wrap; /* ensures wrapping if there are too many wishes */
+    justify-content: center; /* centers the wishes horizontally */
+    gap: 20px; /* spacing between wishes */
+    margin-top: 30px;
+    width: 100%;
+    max-width: 1000px; /* optional limit for readability */
+    font-size: 14px;
+
+}
+
+.wish {
+    flex: 1 1 250px; /* responsive boxes — each takes up min 250px */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    margin: 5px;
+    text-align: center;
+}
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.wish-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #5da9e9; /* himmelblå */
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 6px #3b82c4; /* mørkere blå skygge */
+    transition: 0.2s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+
+.wish-button:hover {
+    background-color: #1c4e80; /* lidt mørkere ved hover */
+}
+
+.delete-button {
+    background-color: red;
+}

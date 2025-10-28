@@ -7,9 +7,9 @@ public class Wish {
     private String description;
     private double price;
     private String link;
-    private  Boolean isReserved;
+    private Boolean isReserved;
 
-    public Wish(int id, int userId, String name, String description, double price, String link, Boolean isReverved){
+    public Wish(int id, int userId, String name, String description, double price, String link, Boolean isReserved){
         this.id = id;
         this.userId = userId;
         this.name = name;
