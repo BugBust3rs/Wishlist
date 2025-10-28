@@ -1,7 +1,6 @@
 package com.example.wishlist.Controller;
 
 import com.example.wishlist.Model.User;
-import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
@@ -10,9 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import java.util.List;
 
@@ -100,4 +98,10 @@ public class WishlistController {
         return "redirect:/wishes/" + wish.getUserId();
     }
 
+    @GetMapping("updateWish/{wishId}")
+    public String updateWish(@PathVariable int wishId, Model model){
+        Wish wish = wishlistService.getWishFromWishId(wishId);
+        model.addAttribute("wish", wish);
+        return "updateWish";
+    }
 }
