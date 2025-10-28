@@ -145,3 +145,34 @@ button.submit-btn:hover {
     transform: translateY(3px);
 }
 
+/* --- Baggrund med mange emoji-skyer --- */
+.emoji-clouds {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, #b8e8ff, #f5faff);
+}
+
+/* Brug flere rækker med skyer */
+.emoji-clouds span {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 3rem;
+    opacity: 0.22;
+    animation: moveClouds 80s linear infinite;
+}
+
+/* Lav 6 rækker (du kan ændre antallet) */
+.emoji-clouds span:nth-child(1) { top: 0%;   animation-duration: 100s; opacity: 0.2; }
+.emoji-clouds span:nth-child(2) { top: 15%;  animation-duration: 120s; opacity: 0.25; font-size: 3.5rem; }
+.emoji-clouds span:nth-child(3) { top: 30%;  animation-duration: 140s; opacity: 0.18; font-size: 4rem; }
+.emoji-clouds span:nth-child(4) { top: 45%;  animation-duration: 160s; opacity: 0.23; font-size: 3.2rem; }
+.emoji-clouds span:nth-child(5) { top: 60%;  animation-duration: 180s; opacity: 0.2;  font-size: 3.8rem; }
+.emoji-clouds span:nth-child(6) { top: 75%;  animation-duration: 200s; opacity: 0.17; font-size: 4.2rem; }
+
+@keyframes moveClouds {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}

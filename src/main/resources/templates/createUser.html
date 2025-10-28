@@ -8,7 +8,44 @@
 <header>
     <div class="logo">☁️ WishHub</div>
 </header>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cloudContainer = document.querySelector(".emoji-clouds");
+        for (let i = 0; i < 20; i++) { // antal skyer
+            const cloud = document.createElement("div");
+            cloud.textContent = "☁️";
+            cloud.style.position = "absolute";
+            cloud.style.fontSize = `${Math.random() * 4 + 2}rem`; // 2–6 rem
+            cloud.style.top = `${Math.random() * 100}%`;
+            cloud.style.left = `${Math.random() * 100}%`;
+            cloud.style.opacity = Math.random() * 0.4 + 0.1;
+            cloud.style.animation = `float${i%2 ? 'Left' : 'Right'} ${80 + Math.random()*60}s linear infinite`;
+            cloudContainer.appendChild(cloud);
+        }
+    });
+
+    @keyframes floatLeft {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-200px); }
+    }
+    @keyframes floatRight {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(200px); }
+    }
+</script>
+
 <body>
+
+<div class="emoji-clouds">
+    <span>☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️</span>
+    <span>☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️</span>
+    <span>☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️</span>
+    <span>☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️</span>
+    <span>☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️</span>
+    <span>☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️ ☁️</span>
+</div>
+
+
 <div class="container">
     <button class="close-btn" onclick="window.location.href='/login'">&times;</button>
 
