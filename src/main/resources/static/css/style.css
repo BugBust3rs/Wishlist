@@ -65,6 +65,11 @@ h1 {
     margin-bottom: 25px;
 }
 
+h2 {
+    text-align: center;
+    color: #1c4e80;
+}
+
 /* Tabel */
 table {
     width: 100%;
@@ -175,4 +180,85 @@ button.submit-btn:hover {
 @keyframes moveClouds {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
+}
+.wishes-container {
+    display: flex;
+    flex-wrap: wrap; /* ensures wrapping if there are too many wishes */
+    justify-content: center; /* centers the wishes horizontally */
+    gap: 20px; /* spacing between wishes */
+    margin-top: 30px;
+    width: 100%;
+    max-width: 1000px; /* optional limit for readability */
+    font-size: 14px;
+
+}
+
+.wish {
+    flex: 1 1 100px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    margin: 5px;
+    text-align: center;
+}
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.wish-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #5da9e9; /* himmelblå */
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 6px #3b82c4; /* mørkere blå skygge */
+    transition: 0.2s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+
+.wish-button:hover {
+    background-color: #1c4e80; /* lidt mørkere ved hover */
+}
+
+button.delete-button {
+    background-color: #F44336;
+    border-radius: 5px;
+    margin: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 80px;
+}
+
+button.delete-button:hover {
+    background-color: #D32F2F;
+}
+
+button.rediger-button {
+    background-color: #5da9e9;
+    border-radius: 5px;
+    margin: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 80px;
+}
+
+button.rediger-button:hover {
+    background-color: #2d6fab;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* centers them horizontally */
+    gap: 10px; /* space between buttons */
 }

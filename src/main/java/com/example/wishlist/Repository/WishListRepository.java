@@ -29,7 +29,6 @@ public class WishListRepository {
 
 
     public void deleteWish(int id){
-
         String SQL = "DELETE FROM Wish WHERE wish_id = ?";
         jdbcTemplate.update(SQL, id);
     }
@@ -39,7 +38,7 @@ public class WishListRepository {
 
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Wish wish = new Wish();
-            wish.setId(rs.getInt("id"));
+            wish.setId(rs.getInt("wish_id"));
             wish.setUserId(rs.getInt("user_id"));
             wish.setName(rs.getString("name"));
             wish.setDescription(rs.getString("description"));

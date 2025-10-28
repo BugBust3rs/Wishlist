@@ -1,7 +1,6 @@
 package com.example.wishlist.Controller;
 
 import com.example.wishlist.Model.User;
-import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
@@ -10,9 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import java.util.List;
 
@@ -64,12 +62,11 @@ public class WishlistController {
         return "createUser";
     }
 
-    @PostMapping("/{wishId}/wishes")
+    @PostMapping("deleteWish/{wishId}")
     public String deleteWish(@PathVariable int wishId){
-        wishlistService.deleteWish(wishId);
-        return "redirect:/{id}/wishes";
+        Wish wish = wishlistService.deleteWish(wishId);
+        return "redirect:/wishes/" + wish.getUserId();
     }
-
 
  // Du skal lave postmapping der tjekker om brugeren allerede eksistere,
     // hvis den gør, så får man en fejlmeddelse og hvis ikke, så viderestilles man til login-siden
@@ -85,4 +82,24 @@ public class WishlistController {
 
     }
 
+    @GetMapping("addWish/{userId}")
+    public String addWish(@PathVariable int userId, Model model){
+//        Wish wish = new Wish();
+//        wish.setUserId(userId);
+//        model.addAttribute("wish", wish);
+        return "addWish";
+    }
+
+    @PostMapping("saveWish")
+    public String saveWish(@ModelAttribute Wish wish){
+        wishlistService.saveWish(wish);
+        return "redirect:/wishes/" + wish.getUserId();
+    }
+
+    @GetMapping("updateWish/{wishId}")
+    public String updateWish(@PathVariable int wishId, Model model){
+        Wish wish = wishlistService.getWishFromWishId(wishId);
+        model.addAttribute("wish", wish);
+        return "updateWish";
+    }
 }
