@@ -84,11 +84,13 @@ public class WishlistController {
 
     @GetMapping("addWish/{userId}")
     public String addWish(@PathVariable int userId, Model model){
-//        Wish wish = new Wish();
-//        wish.setUserId(userId);
-//        model.addAttribute("wish", wish);
+        Wish wish = new Wish();
+        wish.setUserId(userId);
+        model.addAttribute("wish", wish);
         return "addWish";
     }
+
+
 
     @PostMapping("saveWish")
     public String saveWish(@ModelAttribute Wish wish){
