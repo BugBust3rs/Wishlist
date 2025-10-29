@@ -2,22 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Wishlist</title>
-    <link th:href="@{/main.css}" rel="stylesheet">
+    <title>WishHub</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+<header>
+    <div class="logo">☁️ WishHub</div>
+</header>
 <body>
-<form action="#" th:action="@{/entrance}" th:object="${user}" method="post">
-    <label>Email:
-        <input th:required="required" type="text" th:field="*{email}"/>
-    </label>
-    <br/>
-    <label>Password:
-        <input th:required="required" type="text" th:field="*{password}"/>
-    </label>
+<div class="emoji-clouds"></div>
+<div class="container">
+    <form th:action="@{/wishhub/landingPage}">
+        <button class="close-btn">&times;</button>
+    </form>
+    <h1>
+        Log ind
+    </h1>
+
+    <form action="#" th:action="@{entrance}" th:object="${user}" method="post">
+        <table>
+            <tr>
+                <td>
+                    Email:
+                </td>
+                <td>
+                    <input required type="text" placeholder="Email" th:field="*{email}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Adgangskode:
+                </td>
+                <td>
+                    <input required type="password" placeholder="Adgangskode" th:field="*{password}">
+                </td>
+            </tr>
+
+
+        </table>
+        <button type="submit" class="button">Log ind</button>
+    </form>
+    <form th:action="@{/wishhub/createUser}">
+        <button class="button primary">Opret profil</button>
     </form>
 
-
-</form>
-
+</div>
 </body>
 </html>
