@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/main.css}" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div class="main-content">
+    <h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
+    <form th:action="@{/addWish/{userId}(userId=${user.getId()})}">
+        <button type="submit" class="wish-button">Tilføj et Ønske</button>
+    </form>
 
+    <div class="wishes-container">
+        <div th:each="wish : ${wishes}" class="wish">
+            <div>
+                <h2 th:text="${wish.name}"></h2>
+                <p th:text="${wish.description}"></p>
+                <p th:text="${wish.price} + ' dkk'"></p>
+                <a th:href="${wish.link}" th:text="${wish.link}"></a>
+            </div>
+            <div class="button-group">
+                <form th:action="@{/deleteWish/{wishId}(wishId=${wish.id})}">
+                    <button class="delete-button" type="submit">Slet</button>
+                </form>
+                <form th:action="@{/updateWish/{wishId}(wishId=${wish.id})}">
+                    <button class="rediger-button" type="submit">Rediger</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -35,4 +35,19 @@ public class UserService {
         }
         return null;
     }
+
+    public boolean doesUserExists(String email){
+        List<User> users = repository.getUsers();
+
+        for(User user : users){
+         if(user.getEmail().equals(email)){
+             return  true;
+         }
+        }
+        return false;
+    }
+
+    public void createUser(User user){
+        repository.createUser(user);
+    }
 }

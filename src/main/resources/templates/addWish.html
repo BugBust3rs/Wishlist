@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div>
+    <h1>Tilføj et ønske</h1>
+    <form action="#" th:action="@{/saveWish}" th:object="${wish}" method="post">
+        <table>
+            <tr>
+                <td>
+                    Ønske
+                </td>
+                <td>
+                    <input type="text" placeholder="Dit ønske" th:field="*{name}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Beskrivelse
+                </td>
+                <td>
+                    <input type="text" placeholder="fx. farve eller størrelse osv." th:field="*{description}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Pris
+                </td>
+                <td>
+                    <input type="text" placeholder="Pris på ønsket" th:field="*{price}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Link til ønske
+                </td>
+                <td>
+                    <input type="text" placeholder="https://eksempel.dk/gave" th:field="*{link}">
+                </td>
+                <input type="hidden" th:field="*{userId}">
+            </tr>
+
+        </table>
+
+    <button type="submit" class="button">Opret</button>
+    </form>
+    <form th:action="@{/wishes/{userId}(userId=${wish.userId})}" th:object="${wish}">
+        <button type="submit" class="wish-button">Fortryd</button>
+    </form>
+</div>
+</body>
+</html>
