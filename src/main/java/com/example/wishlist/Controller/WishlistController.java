@@ -73,9 +73,12 @@ public class WishlistController {
 
     @DeleteMapping("deleteWish/{wishId}")
     public String deleteWish(@PathVariable int wishId, HttpSession session){
+        if (!isLoggedIn(session)){
+            return "login";
+        }
         wishlistService.deleteWish(wishId);
         User user = (User)session.getAttribute("user");
-        return isLoggedIn(session) ? "redirect:/wishes/" + user.getId() : "login";
+        return "redirect:/wishes/" + user.getId();
     }
 
     @PostMapping("/register")
@@ -100,15 +103,21 @@ public class WishlistController {
 
     @PostMapping("saveWish")
     public String saveWish(@ModelAttribute Wish wish, HttpSession session){
+        if (!isLoggedIn(session)){
+            return "login";
+        }
         User user = (User)session.getAttribute("user");
         wishlistService.saveWish(wish);
-        return isLoggedIn(session) ? "redirect:/wishes/" + user.getId() : "login";
+        return "redirect:/wishes/" + user.getId();
     }
 
     @PutMapping("updateWish/{wishId}")
     public String updateWish(@PathVariable int wishId, Model model, HttpSession session){
+        if (!isLoggedIn(session)){
+            return "login";
+        }
         Wish wish = wishlistService.getWishFromWishId(wishId);
         model.addAttribute("wish", wish);
-        return isLoggedIn(session) ? "updateWish" : "login";
+        return "updateWish";
     }
 }
