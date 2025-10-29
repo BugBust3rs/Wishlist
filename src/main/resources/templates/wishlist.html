@@ -8,7 +8,7 @@
 <body>
 <div class="main-content">
     <h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
-    <form th:action="@{/addWish/{userId}(userId=${user.getId()})}">
+    <form th:action="@{/wishhub/addWish}">
         <button type="submit" class="wish-button">Tilføj et Ønske</button>
     </form>
 
@@ -21,10 +21,10 @@
                 <a th:href="${wish.link}" th:text="${wish.link}"></a>
             </div>
             <div class="button-group">
-                <form th:action="@{/deleteWish/{wishId}(wishId=${wish.id})}">
+                <form th:action="@{/wishhub/deleteWish/{wishId}(wishId=${wish.id})}" method="post">
                     <button class="delete-button" type="submit">Slet</button>
                 </form>
-                <form th:action="@{/updateWish/{wishId}(wishId=${wish.id})}">
+                <form th:action="@{/wishhub/updateWish/{wishId}(wishId=${wish.id})}">
                     <button class="rediger-button" type="submit">Rediger</button>
                 </form>
             </div>
