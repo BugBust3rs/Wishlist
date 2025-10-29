@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WishHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+    <div class="logo">☁️ WishHub</div>
+</header>
+
+<div class="emoji-clouds"></div>
+<form th:action="@{/wishhub/login}">
+    <button class="button primary">Log ind</button>
+</form>
+<form th:action="@{/wishhub/createUser}">
+    <button class="button primary">Opret profil</button>
+</form>
+
+
+</div>
+</body>
+</html>

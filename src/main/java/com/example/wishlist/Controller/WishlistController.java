@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RequestMapping("")
+@RequestMapping("wishhub")
 @Controller
 public class WishlistController {
 
@@ -34,17 +34,21 @@ public class WishlistController {
         return session.getAttribute("user") != null;
     }
 
+    @GetMapping("/landingPage")
+    public String landingPage(){
+        return "landingPage";
+    }
+
     @PostMapping("entrance")
-    public String login(@RequestParam("email") String email,
-                        @RequestParam("pw") String pw,
+    public String login(@ModelAttribute User user,
                         HttpSession session) {
-        User user = userService.login(email, pw);
-        if (user != null) {
-            session.setAttribute("user", user);
+        User u1 = userService.login(user.getEmail(), user.getPassword());
+        if (u1 != null) {
+            session.setAttribute("user", u1);
             session.setMaxInactiveInterval(600);
-            return "redirect:/wishes/" + user.getId() ;
+            return "redirect:/wishes/" + u1.getId() ;
         }
-        return "redirect:/login";
+        return "redirect:/wishhub/login";
 
     }
 
