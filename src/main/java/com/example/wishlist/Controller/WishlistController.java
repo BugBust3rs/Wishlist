@@ -49,7 +49,7 @@ public class WishlistController {
     }
 
     @GetMapping("login")
-    public String login(Model model, HttpSession session) {
+    public String login(HttpSession session) {
         User user = new User();
         session.setAttribute("user", user);
         return "login";
