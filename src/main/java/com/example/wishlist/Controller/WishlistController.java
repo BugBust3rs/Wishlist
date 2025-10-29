@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 
-@RequestMapping("")
+@RequestMapping("wishhub")
 @Controller
 public class WishlistController {
 
@@ -29,15 +29,19 @@ public class WishlistController {
         this.userService = userService;
     }
 
+    @GetMapping("/landingPage")
+    public String landingPage(){
+        return "landingPage";
+    }
+
     @PostMapping("entrance")
-    public String login(@RequestParam("email") String email,
-                        @RequestParam("pw") String pw,
-                        Model model) {
-        User user = userService.login(email, pw);
-        if (user != null) {
-            return "redirect:/wishes/" + user.getId() ;
+    public String login(@ModelAttribute User user, Model model) {
+        User u1 = userService.login(user.getEmail(), user.getPassword());
+        if (u1 != null) {
+            return "redirect:/wishes/" + u1.getId();
         }
-        return "redirect:/login";
+        model.addAttribute("fejlmeddelse", "Forkert email eller adgangskode");
+        return "redirect:/wishhub/login";
 
     }
 
@@ -65,12 +69,11 @@ public class WishlistController {
     }
 
     @PostMapping("/{wishId}/wishes")
-    public String deleteWish(@PathVariable int wishId){
+    public String deleteWish(@PathVariable int wishId) {
         wishlistService.deleteWish(wishId);
         return "redirect:/{id}/wishes";
     }
- // Du skal lave postmapping der tjekker om brugeren allerede eksistere,
-    // hvis den gør, så får man en fejlmeddelse og hvis ikke, så viderestilles man til login-siden
+
 
 //    @PostMapping("/{userId}/user")
 //    public String createUser(@PathVariable int userId){
