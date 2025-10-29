@@ -31,11 +31,8 @@ public class WishlistService {
     }
 
 
-    public Wish deleteWish(int wishId) {
-        Wish w = getWishFromWishId(wishId);
-
+    public void deleteWish(int wishId) {
         repository.deleteWish(wishId);
-        return w;
     }
 
     public void saveWish(Wish wish) {
