@@ -52,7 +52,7 @@ public class WishlistController {
 
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login(Model model) {
         User user = new User();
         model.addAttribute("user", user);

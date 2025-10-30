@@ -2,9 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WishHub</title>
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        @keyframes floatLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-200px); }
+        }
+        @keyframes floatRight {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(200px); }
+        }
+    </style>
 </head>
+<body>
+
+<header>
+    <a href="/wishhub/landingPage" class="header-logo">
+        ☁️ WishHub
+    </a>
+</header>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cloudContainer = document.querySelector(".emoji-clouds");
+        for (let i = 0; i < 20; i++) {
+            const cloud = document.createElement("div");
+            cloud.textContent = "☁️";
+            cloud.style.position = "absolute";
+            cloud.style.fontSize = `${Math.random() * 4 + 2}rem`;
+            cloud.style.top = `${Math.random() * 100}%`;
+            cloud.style.left = `${Math.random() * 100}%`;
+            cloud.style.opacity = Math.random() * 0.4 + 0.1;
+            const dir = (i % 2) ? 'Left' : 'Right';
+            cloud.style.animation = 'float' + dir + ' ' + (80 + Math.random()*60) + 's linear infinite';
+            cloudContainer.appendChild(cloud);
+        }
+    });
+</script>
+
+<div class="emoji-clouds"></div>
+
+
 <body>
 <div>
     <h1>Tilføj et ønske</h1>
