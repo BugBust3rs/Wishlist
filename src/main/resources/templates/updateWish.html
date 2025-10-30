@@ -1,83 +1,85 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WishHub</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
-    @keyframes floatLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-200px); }
-    }
-    @keyframes floatRight {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(200px); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>WishHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        @keyframes floatLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-200px);
+            }
+        }
+
+        @keyframes floatRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(200px);
+            }
+        }
+    </style>
 </head>
 <body>
 <header>
-  <a href="/wishhub/landingPage" class="header-logo">
-    ☁️ WishHub
-  </a>
+    <a href="/wishhub/landingPage" class="header-logo">
+        ☁️ WishHub
+    </a>
 </header>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cloudContainer = document.querySelector(".emoji-clouds");
-    for (let i = 0; i < 20; i++) {
-      const cloud = document.createElement("div");
-      cloud.textContent = "☁️";
-      cloud.style.position = "absolute";
-      cloud.style.fontSize = (Math.random() * 4 + 2) + 'rem';
-      cloud.style.top = (Math.random() * 100) + '%';
-      cloud.style.left = (Math.random() * 100) + '%';
-      cloud.style.opacity = Math.random() * 0.4 + 0.1;
-      const dir = (i % 2) ? 'Left' : 'Right';
-      cloud.style.animation = 'float' + dir + ' ' + (80 + Math.random()*60) + 's linear infinite';
-      cloudContainer.appendChild(cloud);
-    }
-  });
+    document.addEventListener("DOMContentLoaded", () => {
+        const cloudContainer = document.querySelector(".emoji-clouds");
+        for (let i = 0; i < 20; i++) {
+            const cloud = document.createElement("div");
+            cloud.textContent = "☁️";
+            cloud.style.position = "absolute";
+            cloud.style.fontSize = (Math.random() * 4 + 2) + 'rem';
+            cloud.style.top = (Math.random() * 100) + '%';
+            cloud.style.left = (Math.random() * 100) + '%';
+            cloud.style.opacity = Math.random() * 0.4 + 0.1;
+            const dir = (i % 2) ? 'Left' : 'Right';
+            cloud.style.animation = 'float' + dir + ' ' + (80 + Math.random() * 60) + 's linear infinite';
+            cloudContainer.appendChild(cloud);
+        }
+    });
 </script>
 
 <div class="emoji-clouds"></div>
 
 
 <div class="container">
-  <h1>Opdater ønske</h1>
-  <form th:action="@{/wishhub/updateWish/{id}(id=${wish.id})}" th:object="${wish}" method="post">
-    <input type="hidden" th:field="*{id}">
+    <h1>Opdater ønske</h1>
+    <form th:action="@{/wishhub/saveWish}" th:object="${wish}" method="post">
+        <input type="hidden" th:field="*{id}">
 
-    <table>
-      <tr>
-        <td>Navn</td>
-        <td><input type="text" th:field="*{name}" placeholder="Ønskets navn" required></td>
-      </tr>
-      <tr>
-        <td>Beskrivelse</td>
-        <td><input type="text" th:field="*{description}" placeholder="Kort beskrivelse"></td>
-      </tr>
-      <tr>
-        <td>Link</td>
-        <td><input type="url" th:field="*{link}" placeholder=""></td>
-      </tr>
-      <tr>
-        <td>Pris</td>
-        <td><input type="number" th:field="*{price}" min="0" step="1" placeholder="DKK"></td>
-      </tr>
-      <tr>
-        <td>Reserveret</td>
-        <td><input type="checkbox" th:field="*{isReserved}"></td>
-      </tr>
-    </table>
-
-    <button type="submit" class="landing-btn" style="margin-right:12px;">Gem ændringer</button>
-    <a th:href="@{/wish/list}" class="landing-btn" style="background-color:#6b7280; box-shadow:0 6px #4b5563;">Tilbage</a>
-  </form>
+        <table>
+            <tr>
+                <td>Navn</td>
+                <td><input type="text" th:field="*{name}" placeholder="Ønskets navn" required></td>
+            </tr>
+            <tr>
+                <td>Beskrivelse</td>
+                <td><input type="text" th:field="*{description}" placeholder="Kort beskrivelse"></td>
+            </tr>
+            <tr>
+                <td>Link</td>
+                <td><input type="text" th:field="*{link}" placeholder="Link til gave"></td>
+            </tr>
+            <tr>
+                <td>Pris</td>
+                <td><input type="number" th:field="*{price}" min="0" step="1" placeholder="DKK"></td>
+            </tr>
 
 
-  <form th:action="@{/wish/delete/{id}(id=${wish.id})}" method="post" style="margin-top:16px;">
-    <button type="submit" class="landing-btn" style="background-color:#e24a4a; box-shadow:0 6px #b43737;" onclick="return confirm('Slet dette ønske? Det kan ikke fortrydes.');">Slet ønske</button>
-  </form>
+        </table>
+
+        <button type="submit" class="wish-button">Opdater</button>
+    </form>
+
 </div>
 </body>
 </html>
