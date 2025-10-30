@@ -8,7 +8,7 @@
 <body>
 <div>
     <h1>Tilføj et ønske</h1>
-    <form action="#" th:action="@{/saveWish}" th:object="${wish}" method="post">
+    <form action="#" th:action="@{/wishhub/saveWish}" th:object="${wish}" method="post">
         <table>
             <tr>
                 <td>
@@ -48,7 +48,7 @@
 
     <button type="submit" class="button">Opret</button>
     </form>
-    <form th:action="@{/wishes/{userId}(userId=${wish.userId})}" th:object="${wish}">
+    <form th:action="@{/wishhub/wishes}" th:object="${wish}">
         <button type="submit" class="wish-button">Fortryd</button>
     </form>
 </div>

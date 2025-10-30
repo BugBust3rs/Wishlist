@@ -1,9 +1,8 @@
 package com.example.wishlist.Service;
 
-import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 
-import com.example.wishlist.Repository.WishListRepository;
+import com.example.wishlist.Repository.WishRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,9 +12,9 @@ import java.util.List;
 @Service
 public class WishlistService {
 
-    private final WishListRepository repository;
+    private final WishRepository repository;
 
-    public WishlistService(WishListRepository repository) {
+    public WishlistService(WishRepository repository) {
         this.repository = repository;
     }
 
