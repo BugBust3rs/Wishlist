@@ -1,8 +1,6 @@
 package com.example.wishlist.Repository;
 
-import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,12 +8,12 @@ import java.util.List;
 
 
 @Repository
-public class WishListRepository {
+public class WishRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
 
-    public WishListRepository(JdbcTemplate jdbcTemplate) {
+    public WishRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
 
     }

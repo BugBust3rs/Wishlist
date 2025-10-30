@@ -12,11 +12,19 @@ CREATE TABLE User (
 
 CREATE TABLE Wish (
                       wish_id INT AUTO_INCREMENT PRIMARY KEY,
-                      user_id int not null,
+                      wishlist_id int not null,
                       name VARCHAR(150) NOT NULL,
                       description VARCHAR(150),
                       link VARCHAR(150),
                       price INTEGER,
                       isReserved BOOLEAN,
                       FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE
+);
+
+Create TABLE Wishlists
+(
+                      wishlist_id INT AUTO_INCREMENT PRIMARY KEY,
+                      name VARCHAR(150) NOT NULL,
+                      user_id int not null,
+                      FOREIGN KEY (user_id) REFERENCES User (user_id) ON DELETE CASCADE
 );
