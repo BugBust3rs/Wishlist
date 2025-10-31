@@ -12,7 +12,7 @@ CREATE TABLE User (
 
 CREATE TABLE Wish (
                       wish_id INT AUTO_INCREMENT PRIMARY KEY,
-                      wishlist_id int not null,
+                      user_id int not null,
                       name VARCHAR(150) NOT NULL,
                       description VARCHAR(150),
                       link VARCHAR(150),

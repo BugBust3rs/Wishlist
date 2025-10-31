@@ -2,6 +2,7 @@ package com.example.wishlist.Controller;
 
 import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
+import com.example.wishlist.Model.Wishlist;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
 import jakarta.servlet.http.HttpSession;
@@ -65,9 +66,12 @@ public class WishlistController {
             return "redirect:/wishhub/login";
         }
         User user = (User)session.getAttribute("user");
+        Wishlist wishlist = wishlistService.getOneWishlistFromUser(user.getId());
         model.addAttribute("user", user);
-        List<Wish> wishes = wishlistService.getWishesFromUser(user.getId());
+        List<Wish> wishes = wishlistService.getWishesFromUser(wishlist.getWishlistId());
         model.addAttribute("wishes", wishes);
+        List<Wishlist> wishlists = wishlistService.getAllWishlistsFromUser(user.getId());
+        model.addAttribute("wishlists", wishlists);
         return  "wishlist";
     }
 

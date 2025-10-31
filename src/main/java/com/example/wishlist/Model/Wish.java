@@ -11,6 +11,7 @@ public class Wish {
 
     public Wish(int id, int userId, String name, String description, double price, String link, Boolean isReserved){
         this.id = id;
+
         this.userId = userId;
         this.name = name;
         this.description = description;
@@ -29,8 +30,8 @@ public class Wish {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getWishlistId() {
+        return wishlistId;
     }
 
     public void setUserId(int userId) {
