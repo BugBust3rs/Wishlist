@@ -66,14 +66,17 @@ public class WishlistController {
         return "redirect:/wishhub/landingPage";
     }
 
-    @GetMapping("/wishes{wishlistId}")
-    public String getWishes(@RequestParam int wishlistId, Model model, HttpSession session) {
+    @GetMapping("/wishes/{wishlistId}")
+    public String getWishes(@PathVariable int wishlistId, Model model, HttpSession session) {
         if (!isLoggedIn(session)) {
             return "redirect:/wishhub/login";
         }
         User user = (User) session.getAttribute("user");
         //do this
         Wishlist wishlist = wishlistService.getWishlist(wishlistId);
+        user.setChosenWhislist(wishlist.getWishlistId());
+        session.setAttribute("user", user);
+
         model.addAttribute("user", user);
         List<Wish> wishes = wishlistService.getWishesFromUser(wishlist.getWishlistId());
         model.addAttribute("wishes", wishes);
@@ -120,7 +123,7 @@ public class WishlistController {
         }
         Wish wish = new Wish();
         User user = (User) session.getAttribute("user");
-        wish.setUserId(user.getId());
+        wish.setWishlistId(user.getChosenWhislist());
         model.addAttribute("wish", wish);
 
         return "addWish";

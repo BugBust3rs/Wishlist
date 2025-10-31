@@ -19,9 +19,9 @@ public class WishRepository {
     }
 
     public void addWish(Wish wish) {
-        String sql = "INSERT INTO Wish (user_id, name, description, price, link, isReserved) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Wish (wishlist_id, name, description, price, link, isReserved) VALUES (?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(sql, wish.getUserId(), wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink(), wish.getReserved());
+        jdbcTemplate.update(sql, wish.getWishlistId(), wish.getName(), wish.getDescription(), wish.getPrice(), wish.getLink(), wish.getReserved());
     }
 
 
@@ -37,7 +37,7 @@ public class WishRepository {
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Wish wish = new Wish();
             wish.setId(rs.getInt("wish_id"));
-            wish.setUserId(rs.getInt("user_id"));
+            wish.setWishlistId(rs.getInt("wishlist_id"));
             wish.setName(rs.getString("name"));
             wish.setDescription(rs.getString("description"));
             wish.setPrice(rs.getDouble("price"));
