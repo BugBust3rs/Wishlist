@@ -85,8 +85,25 @@ public class WishlistController {
 
 
     @GetMapping("/profile")
-    public String getProfile() {
+    public String getProfile(Model model, HttpSession session) {
+        if (!isLoggedIn(session)) {
+            return "redirect:/wishhub/login";
+        }
+        User user = (User) session.getAttribute("user");
+        List<Wishlist> wishlist = wishlistService.getAllWishlistsFromUser(user.getId());
+        model.addAttribute("wishlist", wishlist);
+        Wishlist wl = new Wishlist();
+        model.addAttribute("wl", wl);
         return "profile";
+    }
+
+    @PostMapping("/saveWishlist")
+    public String saveWishlist(@ModelAttribute Wishlist wishlist,HttpSession session){
+        if (!isLoggedIn(session)) {
+            return "redirect:/wishhub/login";
+        }
+        wishlistService.saveWishlist(wishlist);
+        return "redirect:/wishhub/profile";
     }
 
 
@@ -127,11 +144,6 @@ public class WishlistController {
         model.addAttribute("wish", wish);
 
         return "addWish";
-    }
-
-    @GetMapping("addWishList")
-    public String addWishlist() {
-        return "redirect:/wishhub/profile";
     }
 
 
