@@ -53,11 +53,17 @@ public class WishlistController {
 
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/wishhub/landingPage";
     }
 
     @GetMapping("/wishes")

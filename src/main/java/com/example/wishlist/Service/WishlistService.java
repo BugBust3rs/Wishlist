@@ -39,7 +39,7 @@ public class WishlistService {
     }
 
     public void saveWish(Wish wish) {
-        repository.addWish(wish);
+        repository.updateWish(wish);
     }
 
     public Wish getWishFromWishId(int wishId) {
