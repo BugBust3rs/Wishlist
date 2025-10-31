@@ -13,7 +13,7 @@ body {
 header {
     background-color: #5da9e9;
     color: white;
-    padding: 15px 30px;
+    padding: 15px 50px; /* increase from 30px to 50px */
     text-align: left;
     font-size: 1.8rem;
     font-weight: bold;
@@ -22,9 +22,32 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.logout-form {
+    margin-right: 100px;
+}
+
+.logout-button {
+    background-color: #ffffff;
+    color: #5da9e9;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px rgba(0,0,0,0.1);
+}
+
+.logout-button:hover {
+    background-color: #dff3ff;
+    color: #1c4e80;
+}
 .header-logo {
     text-decoration: none;
     color: white;

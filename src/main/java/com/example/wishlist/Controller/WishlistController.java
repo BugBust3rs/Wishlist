@@ -59,6 +59,12 @@ public class WishlistController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/wishhub/landingPage";
+    }
+
     @GetMapping("/wishes")
     public String getWishes( Model model, HttpSession session) {
         if (!isLoggedIn(session)){

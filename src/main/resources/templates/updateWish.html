@@ -16,10 +16,11 @@
   </style>
 </head>
 <body>
-<header>
-  <a href="/wishhub/landingPage" class="header-logo">
-    ☁️ WishHub
-  </a>
+<header class="topbar">
+  <a href="/wishhub/landingPage" class="header-logo">☁️ WishHub</a>
+  <form th:action="@{/wishhub/logout}" class="logout-form">
+    <button type="submit" class="logout-button">Log ud</button>
+  </form>
 </header>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
