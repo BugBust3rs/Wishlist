@@ -44,8 +44,8 @@ public class WishlistService {
 
     public Wish getWishFromWishId(int wishId) {
         List<Wish> wishes = repository.getWishes();
-        for (Wish wish : wishes){
-            if (wish.getId() == wishId){
+        for (Wish wish : wishes) {
+            if (wish.getId() == wishId) {
                 return wish;
             }
         }
@@ -55,19 +55,19 @@ public class WishlistService {
     public Wishlist getOneWishlistFromUser(int userId) {
         List<Wishlist> wishlists = wishlistRepository.getWishlists();
 
-        for(Wishlist wishlist : wishlists){
-            if(wishlist.getUserId() == userId){
-              return  wishlist;
+        for (Wishlist wishlist : wishlists) {
+            if (wishlist.getUserId() == userId) {
+                return wishlist;
             }
         }
         return null;
     }
 
-    public List<Wishlist> getAllWishlistsFromUser(int wishlist_id) {
+    public List<Wishlist> getAllWishlistsFromUser(int user_id) {
         List<Wishlist> wishlists = wishlistRepository.getWishlists();
         List<Wishlist> userWishlists = new ArrayList<>();
-        for(Wishlist wishlist : wishlists){
-            if(wishlist.getUserId() == wishlist_id ){
+        for (Wishlist wishlist : wishlists) {
+            if (wishlist.getUserId() == user_id) {
                 userWishlists.add(wishlist);
             }
         }
@@ -76,6 +76,12 @@ public class WishlistService {
 
 
     public Wishlist getWishlist(int wishlistId) {
+        List<Wishlist> wishlists = wishlistRepository.getWishlists();
+        for(Wishlist wishlist : wishlists) {
+            if (wishlist.getWishlistId() == wishlistId) {
+                return wishlist;
+            }
+        }
         return null;
     }
 }

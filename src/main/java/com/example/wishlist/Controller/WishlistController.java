@@ -3,6 +3,7 @@ package com.example.wishlist.Controller;
 import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Model.Wishlist;
+import com.example.wishlist.Repository.UserRepository;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
 import jakarta.servlet.http.HttpSession;
@@ -23,11 +24,13 @@ public class WishlistController {
 
     private final WishlistService wishlistService;
     private final UserService userService;
+    private final UserRepository userRepository;
 
 
-    public WishlistController(WishlistService wishlistService, UserService userService) {
+    public WishlistController(WishlistService wishlistService, UserService userService, UserRepository userRepository) {
         this.wishlistService = wishlistService;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     private boolean isLoggedIn(HttpSession session) {
@@ -68,12 +71,13 @@ public class WishlistController {
 
     @GetMapping("/wishes/{wishlistId}")
     public String getWishes(@PathVariable int wishlistId, Model model, HttpSession session) {
-        if (!isLoggedIn(session)) {
+        User user = (User) session.getAttribute("user");
+        Wishlist wishlist = wishlistService.getWishlist(wishlistId);
+        // lav et tjek om user.getuserid == wishlist.getuserid, hvis det er false redirect til login
+        if (!isLoggedIn(session) || user.getId() != wishlist.getUserId()) {
             return "redirect:/wishhub/login";
         }
-        User user = (User) session.getAttribute("user");
-        //do this
-        Wishlist wishlist = wishlistService.getWishlist(wishlistId);
+
         user.setChosenWhislist(wishlist.getWishlistId());
         session.setAttribute("user", user);
 
