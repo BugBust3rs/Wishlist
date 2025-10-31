@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="main-content">
+    <h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
+
+    <div class="wishes-container">
+        <div th:each="wish : ${wishes}" class="wish">
+            <div>
+                <h2 th:text="${wish.name}"></h2>
+                <p th:text="${wish.description}"></p>
+                <p th:text="${wish.price} + ' dkk'"></p>
+                <a th:href="${wish.link}" th:text="${wish.link}"></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
