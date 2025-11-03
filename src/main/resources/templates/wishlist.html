@@ -17,7 +17,7 @@
 </head>
 <body>
 <header class="topbar">
-    <a href="/wishhub/landingPage" class="header-logo">☁️ WishHub</a>
+    <a href="/wishhub/profile" class="header-logo">☁️ WishHub</a>
     <form th:action="@{/wishhub/logout}" class="logout-form">
         <button type="submit" class="logout-button">Log ud</button>
     </form>
@@ -44,7 +44,7 @@
 
 
 <div class="main-content">
-    <h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
+    <h1 th:text="${wishlistName}"></h1>
     <form th:action="@{/wishhub/addWish}">
         <button type="submit" class="wish-button">Tilføj et Ønske</button>
     </form>

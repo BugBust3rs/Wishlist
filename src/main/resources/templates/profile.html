@@ -1,10 +1,256 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WishHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        @keyframes floatLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-200px);
+            }
+        }
+
+        @keyframes floatRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(200px);
+            }
+        }
+
+        .section-header {
+            width: 100%;
+            text-align: center;
+            margin: 24px 0 16px;
+            padding-bottom: 4px;
+        }
+
+        .section-title {
+            margin: 0;
+        }
+
+        .create-form {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .create-input {
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 8px 12px;
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.6);
+            outline: none;
+        }
+
+        .create-input:focus {
+            border-color: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .create-button {
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-weight: 600;
+            background: #ffffff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .create-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+            background-color: #f7f7f7;
+        }
+
+        @media (max-width: 720px) {
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .create-form {
+                width: 100%;
+            }
+
+            .create-input {
+                flex: 1;
+                width: 100%;
+            }
+        }
+
+        .wish-link {
+            display: block;
+            height: 100%;
+        }
+
+        .wish-link {
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            text-align: inherit;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+        .wish-link:focus { outline: none; }
+        .wish-card { display: block; }
+
+        .wish-card {
+            border: 1px solid transparent;
+            border-radius: 14px;
+            padding: 16px 18px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+        .wish-link:hover .wish-card,
+        .wish-link:focus-visible .wish-card {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+            background-color: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+        .wish-link:active .wish-card {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+        }
+
+        .wish-card h2 {
+            margin: 0;
+            color: inherit;
+        }
+
+        .wishes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            align-items: stretch;
+            margin-top: 8px;
+        }
+
+        .wishlist-item {
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+
+        .wishes-container {
+            justify-items: center;
+        }
+
+        .wish-card {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .create-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 18px 0 10px;
+        }
+
+        .create-form--below {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .create-form--below .create-input {
+            width: 320px;
+            max-width: 90vw;
+        }
+
+        .create-form--below .create-button {
+            margin-top: 8px;
+        }
+
+        .profile-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .create-form--below {
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .create-form--below .create-input {
+            width: 100%;
+        }
+
+        .create-form--below .create-button {
+            align-self: center;
+        }
+
+    </style>
 </head>
 <body>
+<header class="topbar">
+    <a href="/wishhub/profile" class="header-logo">☁️ WishHub</a>
+    <form th:action="@{/wishhub/logout}" class="logout-form">
+        <button type="submit" class="logout-button">Log ud</button>
+    </form>
+</header>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cloudContainer = document.querySelector(".emoji-clouds");
+        for (let i = 0; i < 20; i++) {
+            const cloud = document.createElement("div");
+            cloud.textContent = "☁️";
+            cloud.style.position = "absolute";
+            cloud.style.fontSize = `${Math.random() * 4 + 2}rem`;
+            cloud.style.top = `${Math.random() * 100}%`;
+            cloud.style.left = `${Math.random() * 100}%`;
+            cloud.style.opacity = Math.random() * 0.4 + 0.1;
+            const dir = (i % 2) ? 'Left' : 'Right';
+            cloud.style.animation = 'float' + dir + ' ' + (80 + Math.random() * 60) + 's linear infinite';
+            cloudContainer.appendChild(cloud);
+        }
+    });
+</script>
 
+<div class="emoji-clouds"></div>
+
+<main class="profile-content">
+    <div class="section-header">
+        <h2 class="section-title">Ønskelister</h2>
+    </div>
+    <div class="wishes-container">
+        <div th:each="wl : ${wishlist}" class="wishlist-item">
+            <form th:action="@{/wishhub/wishes/{id}(id=${wl.wishlistId})}">
+                <button type="submit" class="wish-link">
+                    <span class="wish-card">
+                        <h2 th:text="${wl.name}"></h2>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="create-wrapper">
+        <form th:action="@{/wishhub/saveWishlist}" th:object="${wl}" method="post"
+              class="create-form create-form--below">
+            <input th:field="*{name}" placeholder="Ny ønskeliste..." class="create-input">
+            <input type="hidden" th:field="*{userId}">
+            <button type="submit" class="create-button">Opret</button>
+        </form>
+    </div>
+</main>
 </body>
 </html>

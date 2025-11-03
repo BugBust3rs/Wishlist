@@ -18,7 +18,7 @@
 <body>
 
 <header class="topbar">
-    <a href="/wishhub/landingPage" class="header-logo">☁️ WishHub</a>
+    <a href="/wishhub/profile" class="header-logo">☁️ WishHub</a>
     <form th:action="@{/wishhub/logout}" class="logout-form">
         <button type="submit" class="logout-button">Log ud</button>
     </form>
@@ -44,7 +44,7 @@
 <div class="emoji-clouds"></div>
 
 
-<body>
+
 <div>
     <h1>Tilføj et ønske</h1>
     <form action="#" th:action="@{/wishhub/saveWish}" th:object="${wish}" method="post">
@@ -80,14 +80,14 @@
                 <td>
                     <input type="text" placeholder="https://eksempel.dk/gave" th:field="*{link}">
                 </td>
-                <input type="hidden" th:field="*{userId}">
+                <input type="hidden" th:field="*{wishlistId}">
             </tr>
 
         </table>
 
     <button type="submit" class="button">Opret</button>
     </form>
-    <form th:action="@{/wishhub/wishes}" th:object="${wish}">
+    <form th:action="@{/wishhub/wishes/{wishlistId}(wishlistId=${wish.getWishlistId()})}">
         <button type="submit" class="wish-button">Fortryd</button>
     </form>
 </div>

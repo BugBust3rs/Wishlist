@@ -74,7 +74,7 @@ public class Wish {
         return isReserved;
     }
 
-    public void setReserved(Boolean reverved) {
-        isReserved = reverved;
+    public void setReserved(Boolean isReserved) {
+        this.isReserved = isReserved;
     }
 }

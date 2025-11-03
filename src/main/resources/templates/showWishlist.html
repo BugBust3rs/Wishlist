@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="topbar">
+    <a href="/wishhub/landingPage" class="header-logo">☁️ WishHub</a>
+</header>
+<div class="main-content">
+    <h1 th:text="${userName} + 's ønskeliste'"></h1>
+    <form th:action="@{/wishhub/reserve}" method="post">
+    <div class="wishes-container">
+        <div th:each="wish, iter : ${wishes}" class="wish">
+            <div>
+                <h2 th:text="${wish.name}"></h2>
+                <p th:text="${wish.description}"></p>
+                <p th:text="${wish.price} + ' dkk'"></p>
+                <a th:href="${wish.link}" th:text="${wish.link}"></a>
+            </div>
+
+            <input type="hidden" th:name="|wishes[${iter.index}].id|" th:value="${wish.id}">
+
+            <input type="hidden" th:name="|wishes[${iter.index}].reserved|" value="false">
+
+            <label th:for="|reserved-${iter.index}|">Reserveret</label>
+            <input
+                type="checkbox"
+                th:id="|reserved-${iter.index}|"
+                th:name="|wishes[${iter.index}].reserved|"
+                value="true"
+                th:checked="${wish.reserved}">
+        </div>
+    </div>
+            <button type="submit">gem</button>
+    </form>
+</div>
+</body>
+</html>
