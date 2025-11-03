@@ -5,15 +5,27 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private int chosenWhislist;
+
+
 
     public User(int id, String password, String email, String name) {
         this.id = id;
         this.password = password;
         this.email = email;
         this.name = name;
+
     }
 
     public User(){}
+
+    public int getChosenWhislist() {
+        return chosenWhislist;
+    }
+
+    public void setChosenWhislist(int chosenWhislist) {
+        this.chosenWhislist = chosenWhislist;
+    }
 
     public int getId() {
         return id;
