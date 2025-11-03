@@ -43,9 +43,29 @@
 <div class="emoji-clouds"></div>
 
 
-<div id="wishlist-profile">
-    <a class="chip" th:text="'Alle ønsker'"></a>
-    <a class="chip" th:each="wl : ${wishlists}" th:text="${wl.name}"></a>
+<div id="wishlist-profile" class="button">
+    <a class="button" th:href="@{/wishhub/wishes}" th:text="'Alle ønsker'"></a>
+    <a class="button" th:each="wl : ${wishlists}"
+       th:href="@{/wishhub/wishes/{id}(id=${wl.wishlistId})}"
+       th:text="${wl.name}">
+    </a>
+
+    <div class="button" th:if="${wishes} != null and !#lists.isEmpty(wishes)">
+        <article class="button" th:each="w : ${wishes}">
+            <h3>
+                <a th:if="${w.link} != null" th:href="${w.link}" th:text="${w.name}" target="_blank" rel="noopener">Wish</a>
+                <span th:if="${w.link} == null" th:text="${w.name}">Wish</span>
+            </h3>
+            <p th:if="${w.description} != null" th:text="${w.description}">Beskrivelse…</p>
+            <div>
+                <form th:action="@{/wishhub/wish/toggleReserve(id=${w.wishId})}" method="post">
+                    <button type="submit" class="reserve-btn" th:aria-pressed="${w.reserved} ? 'true' : 'false'">
+                        <span th:text="${w.reserved} ? '✓ Reserveret' : 'Reserver'">Reserver</span>
+                    </button>
+                </form>
+            </div>
+        </article>
+    </div>
 </div>
 
 </body>
