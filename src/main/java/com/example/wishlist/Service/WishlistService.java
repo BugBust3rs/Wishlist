@@ -90,8 +90,4 @@ public class WishlistService {
     public void saveWishlist(Wishlist wishlist) {
         wishlistRepository.addWishlist(wishlist);
     }
-
-    public Wish updateReservation(boolean isReserved) {
-        return null;
-    }
 }
