@@ -21,10 +21,8 @@
                 <a th:href="${wish.link}" th:text="${wish.link}"></a>
             </div>
 
-            <!-- Ensure we post the wishId so the backend knows which wish to update -->
             <input type="hidden" th:name="|wishes[${iter.index}].id|" th:value="${wish.id}">
 
-            <!-- Post an explicit false first so unchecked boxes still submit a value -->
             <input type="hidden" th:name="|wishes[${iter.index}].reserved|" value="false">
 
             <label th:for="|reserved-${iter.index}|">Reserveret</label>
