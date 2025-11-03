@@ -96,6 +96,7 @@ public class WishlistController {
         List<Wishlist> wishlist = wishlistService.getAllWishlistsFromUser(user.getId());
         model.addAttribute("wishlist", wishlist);
         Wishlist wl = new Wishlist();
+        wl.setUserId(user.getId());
         model.addAttribute("wl", wl);
         return "profile";
     }
