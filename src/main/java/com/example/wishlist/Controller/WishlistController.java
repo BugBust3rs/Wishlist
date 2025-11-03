@@ -25,13 +25,11 @@ public class WishlistController {
 
     private final WishlistService wishlistService;
     private final UserService userService;
-    private final UserRepository userRepository;
 
 
-    public WishlistController(WishlistService wishlistService, UserService userService, UserRepository userRepository) {
+    public WishlistController(WishlistService wishlistService, UserService userService) {
         this.wishlistService = wishlistService;
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
     private boolean isLoggedIn(HttpSession session) {
