@@ -2,6 +2,7 @@ package com.example.wishlist.Controller;
 
 import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
+import com.example.wishlist.Model.Wishlist;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
 import jakarta.servlet.http.HttpSession;
@@ -130,4 +131,29 @@ public class WishlistController {
         model.addAttribute("wish", wish);
         return "updateWish";
     }
+
+    @GetMapping("/sharedLink/{wishlistId}")
+    public String showWishlist(@PathVariable int wishlistId, Model model) {
+        List<Wish> wishlist = wishlistService.getWishesFromUser(wishlistId);
+
+        model.addAttribute("wishlist", wishlist);
+
+        return "showWishlist";
+        }
+
+   /* @GetMapping("/delelink/{wishlistId}")
+    public String showSharedWishlist(@PathVariable int wishlistId, Model model) {
+        Wishlist wishlist = wishlistService.wishlistById(wishlistId);
+
+        if (wishlist == null) {
+            return "error"; // fx en simpel fejlside
+        }
+
+        // Tilføj både listen og ønskerne til modellen
+        model.addAttribute("wishlist", wishlist);
+        model.addAttribute("wishes", wishlist.getWishlist());
+
+        return "showWishlist"; // din HTML-side
+
+    } */
 }
