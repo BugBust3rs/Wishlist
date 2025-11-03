@@ -80,7 +80,7 @@ public class WishlistController {
         user.setChosenWhislist(wishlist.getWishlistId());
         session.setAttribute("user", user);
 
-        model.addAttribute("user", user);
+        model.addAttribute("wishlistName", wishlist.getName());
         List<Wish> wishes = wishlistService.getWishesFromUser(wishlist.getWishlistId());
         model.addAttribute("wishes", wishes);
         return "wishlist";
@@ -123,8 +123,8 @@ public class WishlistController {
         if (!isLoggedIn(session)) {
             return "redirect:/wishhub/login";
         }
-        wishlistService.deleteWish(wishId);
-        return "redirect:/wishhub/wishes";
+        Wish wish = wishlistService.deleteWish(wishId);
+        return "redirect:/wishhub/wishes/" + wish.getWishlistId();
     }
 
     @PostMapping("/register")
@@ -157,7 +157,7 @@ public class WishlistController {
             return "redirect:/wishhub/login";
         }
         wishlistService.saveWish(wish);
-        return "redirect:/wishhub/wishes";
+        return "redirect:/wishhub/wishes/" + wish.getWishlistId();
     }
 
     @GetMapping("updateWish/{wishId}")

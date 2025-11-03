@@ -87,7 +87,7 @@
 
     <button type="submit" class="button">Opret</button>
     </form>
-    <form th:action="@{/wishhub/wishes}" th:object="${wish}">
+    <form th:action="@{/wishhub/wishes/{wishlistId}(wishlistId=${wish.getWishlistId()})}">
         <button type="submit" class="wish-button">Fortryd</button>
     </form>
 </div>
