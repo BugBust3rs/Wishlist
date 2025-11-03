@@ -75,7 +75,7 @@ public class WishlistController {
         user.setChosenWhislist(wishlist.getWishlistId());
         session.setAttribute("user", user);
 
-        model.addAttribute("wishlistName", wishlist.getName());
+        model.addAttribute("wishlist", wishlist);
         List<Wish> wishes = wishlistService.getWishesFromUser(wishlist.getWishlistId());
         model.addAttribute("wishes", wishes);
         return "wishlist";
