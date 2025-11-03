@@ -34,12 +34,14 @@ public class WishlistService {
     }
 
 
-    public void deleteWish(int wishId) {
+    public Wish deleteWish(int wishId) {
+        Wish wish = getWishFromWishId(wishId);
         wishRepository.deleteWish(wishId);
+        return wish;
     }
 
     public void saveWish(Wish wish) {
-        wishRepository.updateWish(wish);
+        wishRepository.addWish(wish);
     }
 
     public Wish getWishFromWishId(int wishId) {

@@ -44,7 +44,7 @@
 
 
 <div class="main-content">
-    <h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
+    <h1 th:text="${wishlistName}"></h1>
     <form th:action="@{/wishhub/addWish}">
         <button type="submit" class="wish-button">Tilføj et Ønske</button>
     </form>
