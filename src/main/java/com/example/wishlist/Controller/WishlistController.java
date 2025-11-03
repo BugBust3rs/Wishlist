@@ -3,8 +3,10 @@ package com.example.wishlist.Controller;
 import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Model.Wishlist;
+import com.example.wishlist.Repository.UserRepository;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
+import com.example.wishlist.exception.ApiRequestException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,7 +49,7 @@ public class WishlistController {
         if (u1 != null) {
             session.setAttribute("user", u1);
             session.setMaxInactiveInterval(600);
-            return "redirect:/wishhub/wishes";
+            return "redirect:/wishhub/profile";
         }
         return "redirect:/wishhub/login";
 
@@ -68,12 +70,13 @@ public class WishlistController {
 
     @GetMapping("/wishes/{wishlistId}")
     public String getWishes(@PathVariable int wishlistId, Model model, HttpSession session) {
-        if (!isLoggedIn(session)) {
+        User user = (User) session.getAttribute("user");
+        Wishlist wishlist = wishlistService.getWishlist(wishlistId);
+        // lav et tjek om user.getuserid == wishlist.getuserid, hvis det er false redirect til login
+        if (!isLoggedIn(session) || user.getId() != wishlist.getUserId()) {
             return "redirect:/wishhub/login";
         }
-        User user = (User) session.getAttribute("user");
-        //do this
-        Wishlist wishlist = wishlistService.getWishlist(wishlistId);
+
         user.setChosenWhislist(wishlist.getWishlistId());
         session.setAttribute("user", user);
 

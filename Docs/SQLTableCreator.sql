@@ -33,3 +33,4 @@ CREATE TABLE Wish
     isReserved  BOOLEAN,
     FOREIGN KEY (wishlist_id) REFERENCES Wishlists (wishlist_id) ON DELETE CASCADE
 );
+
