@@ -171,6 +171,15 @@ public class WishlistController {
         return "updateWish";
     }
 
+    @PostMapping("updateWish")
+    public String updateWish(@ModelAttribute Wish wish, HttpSession session) {
+        if (!isLoggedIn(session)) {
+            return "redirect:/wishhub/login";
+        }
+        wishlistService.updateWish(wish);
+        return "redirect:/wishhub/wishes/" + wish.getWishlistId();
+    }
+
     @GetMapping("/sharedLink/{wishlistId}")
     public String showSharedWishlist(@PathVariable int wishlistId, Model model) {
         Wishlist wishlist = wishlistService.getWishlist(wishlistId);
@@ -189,11 +198,9 @@ public class WishlistController {
     }
 
     @PostMapping("/reserve")
-    public String reserveWish(@ModelAttribute List<Wish> wishes){
-        // update wish med dette wish i repo
-        wishlistService.updateWishes(wishes);
-
-        return "redirect:/wishhub//sharedLink/" + wishes.getFirst().getWishlistId();
+    public String reserveWish(@ModelAttribute("wishes") List<Wish> wishes) {
+        int wishlistId = wishlistService.updateWishes(wishes);
+        return "redirect:/wishhub/sharedLink/" + wishlistId;
     }
 
 

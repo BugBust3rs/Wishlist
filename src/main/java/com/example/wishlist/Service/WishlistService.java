@@ -91,13 +91,16 @@ public class WishlistService {
         wishlistRepository.addWishlist(wishlist);
     }
 
-    public Wish updateReservation(boolean isReserved) {
-        return null;
-    }
-
-    public void updateWishes(List<Wish> wishes) {
+    public int updateWishes(List<Wish> wishes) {
+        int wishlistId = 0;
         for (Wish w : wishes){
             wishRepository.updateWish(w);
+            wishlistId = w.getWishlistId();
         }
+        return wishlistId;
+    }
+
+    public void updateWish(Wish wish){
+        wishRepository.updateWish(wish);
     }
 }
