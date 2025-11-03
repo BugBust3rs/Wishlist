@@ -102,7 +102,7 @@ public class WishlistController {
     }
 
     @PostMapping("/saveWishlist")
-    public String saveWishlist(@ModelAttribute Wishlist wishlist,HttpSession session){
+    public String saveWishlist(@ModelAttribute Wishlist wishlist, HttpSession session) {
         if (!isLoggedIn(session)) {
             return "redirect:/wishhub/login";
         }
@@ -171,27 +171,29 @@ public class WishlistController {
     }
 
     @GetMapping("/sharedLink/{wishlistId}")
-    public String showWishlist(@PathVariable int wishlistId, Model model) {
-        List<Wish> wishlist = wishlistService.getWishesFromUser(wishlistId);
-
-        model.addAttribute("wishlist", wishlist);
-
-        return "showWishlist";
-        }
-
-   /* @GetMapping("/delelink/{wishlistId}")
     public String showSharedWishlist(@PathVariable int wishlistId, Model model) {
-        Wishlist wishlist = wishlistService.wishlistById(wishlistId);
-
-        if (wishlist == null) {
-            return "error"; // fx en simpel fejlside
-        }
+        Wishlist wishlist = wishlistService.getWishlist(wishlistId);
+        model.addAttribute("wishlistname", wishlist.getName());
+        User user = userService.getUser(wishlist.getUserId());
+        model.addAttribute("userName", user.getName());
+        List<Wish> wishes = wishlistService.getWishesFromUser(wishlistId);
 
         // Tilføj både listen og ønskerne til modellen
-        model.addAttribute("wishlist", wishlist);
-        model.addAttribute("wishes", wishlist.getWishlist());
+
+        model.addAttribute("wishes", wishes);
+
 
         return "showWishlist"; // din HTML-side
 
-    } */
+    }
+
+    @PostMapping("/reserve")
+    public String reserveWish(@ModelAttribute List<Wish> wishes){
+        // update wish med dette wish i repo
+        wishlistService.updateWishes(wishes);
+
+        return "redirect:/wishhub//sharedLink/" + wishes.getFirst().getWishlistId();
+    }
+
+
 }

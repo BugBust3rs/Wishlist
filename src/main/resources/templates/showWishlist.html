@@ -7,8 +7,8 @@
 </head>
 <body>
 <div class="main-content">
-    <h1 th:text="${user.getName()} + 's ønskeliste'"></h1>
-
+    <h1 th:text="${userName} + 's ønskeliste'"></h1>
+    <form th:action="@{/wishhub/reserve}" th:object="${wishes}" method="post">
     <div class="wishes-container">
         <div th:each="wish : ${wishes}" class="wish">
             <div>
@@ -17,8 +17,12 @@
                 <p th:text="${wish.price} + ' dkk'"></p>
                 <a th:href="${wish.link}" th:text="${wish.link}"></a>
             </div>
+            <label th:text="${wish.reserved}"></label>
+            <input th:id="${wish.reserved}" type="checkbox" th:value="${wish.reserved}" th:field="${wish.reserved}">
         </div>
     </div>
+            <button type="submit">gem</button>
+    </form>
 </div>
 </body>
 </html>
