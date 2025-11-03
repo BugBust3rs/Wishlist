@@ -42,3 +42,11 @@
 
 <div class="emoji-clouds"></div>
 
+
+<div id="wishlist-profile">
+    <a class="chip" th:text="'Alle ønsker'"></a>
+    <a class="chip" th:each="wl : ${wishlists}" th:text="${wl.name}"></a>
+</div>
+
+</body>
+</html>
