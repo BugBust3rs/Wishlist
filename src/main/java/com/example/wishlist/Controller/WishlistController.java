@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -67,7 +66,6 @@ public class WishlistController {
     public String getWishes(@PathVariable int wishlistId, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         Wishlist wishlist = wishlistService.getWishlist(wishlistId);
-        // lav et tjek om user.getuserid == wishlist.getuserid, hvis det er false redirect til login
         if (!isLoggedIn(session) || user.getId() != wishlist.getUserId()) {
             return "redirect:/wishhub/login";
         }
@@ -103,6 +101,19 @@ public class WishlistController {
         }
         wishlistService.saveWishlist(wishlist);
         return "redirect:/wishhub/profile";
+    }
+
+    @PostMapping("/deleteWishlist/{wishlistId}")
+    public String deleteWishlist(@PathVariable int wishlistId, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Wishlist wishlist = wishlistService.getWishlist(wishlistId);
+        // lav et tjek om user.getuserid == wishlist.getuserid, hvis det er false redirect til login
+        if (!isLoggedIn(session) || user.getId() != wishlist.getUserId()) {
+            return "redirect:/wishhub/login";
+        }
+        wishlistService.deleteWishlist(wishlistId);
+        return "redirect:/wishhub/profile";
+
     }
 
 

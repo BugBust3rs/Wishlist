@@ -103,4 +103,8 @@ public class WishlistService {
     public void updateWish(Wish wish){
         wishRepository.updateWish(wish);
     }
+
+    public void deleteWishlist(int wishlistId) {
+        wishlistRepository.deleteWishlist(wishlistId);
+    }
 }

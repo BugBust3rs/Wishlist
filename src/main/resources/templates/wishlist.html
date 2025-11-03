@@ -35,11 +35,13 @@
 <div class="main-content">
     <h1 th:text="${wishlist.name}"></h1>
 
-    <form th:action="@{/wishhub/addWish}">
-        <button type="submit" class="wish-button">Tilføj et Ønske</button>
-    </form>
-    <input type="hidden" id="input" th:value="'localhost:8080/wishhub/sharedLink/' + ${wishlist.getWishlistId()}">
-    <button id="button">Klik for at kopiere link</button>
+    <div class="action-bar">
+        <form th:action="@{/wishhub/addWish}">
+            <button type="submit" class="wish-button">Tilføj et Ønske</button>
+        </form>
+        <input type="hidden" id="input" th:value="'localhost:8080/wishhub/sharedLink/' + ${wishlist.getWishlistId()}">
+        <button id="button" class="copy-button">Kopiér link</button>
+    </div>
     <div class="wishes-container">
         <div th:each="wish : ${wishes}" class="wish">
             <div>
