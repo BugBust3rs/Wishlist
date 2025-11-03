@@ -49,7 +49,7 @@ public class WishlistController {
         if (u1 != null) {
             session.setAttribute("user", u1);
             session.setMaxInactiveInterval(600);
-            return "redirect:/wishhub/wishes";
+            return "redirect:/wishhub/profile";
         }
         return "redirect:/wishhub/login";
 
