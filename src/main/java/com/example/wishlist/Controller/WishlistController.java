@@ -6,6 +6,7 @@ import com.example.wishlist.Model.Wishlist;
 import com.example.wishlist.Repository.UserRepository;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
+import com.example.wishlist.exception.ApiRequestException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
