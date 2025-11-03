@@ -3,20 +3,14 @@ package com.example.wishlist.Controller;
 import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Model.Wishlist;
-import com.example.wishlist.Repository.UserRepository;
-import com.example.wishlist.Model.Wishlist;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
-import com.example.wishlist.exception.ApiRequestException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -180,27 +174,24 @@ public class WishlistController {
         return "redirect:/wishhub/wishes/" + wish.getWishlistId();
     }
 
-    @GetMapping("/sharedLink/{wishlistId}")
+    @GetMapping("sharedLink/{wishlistId}")
     public String showSharedWishlist(@PathVariable int wishlistId, Model model) {
         Wishlist wishlist = wishlistService.getWishlist(wishlistId);
         model.addAttribute("wishlistname", wishlist.getName());
         User user = userService.getUser(wishlist.getUserId());
         model.addAttribute("userName", user.getName());
         List<Wish> wishes = wishlistService.getWishesFromUser(wishlistId);
-
+        wishlist.setWishes(wishes);
         // Tilføj både listen og ønskerne til modellen
-
-        model.addAttribute("wishes", wishes);
-
-
+        model.addAttribute("wishlist", wishlist);
         return "showWishlist"; // din HTML-side
 
     }
 
-    @PostMapping("/reserve")
-    public String reserveWish(@ModelAttribute("wishes") List<Wish> wishes) {
-        int wishlistId = wishlistService.updateWishes(wishes);
-        return "redirect:/wishhub/sharedLink/" + wishlistId;
+    @PostMapping("reserveAll")
+    public String reserveAll(@ModelAttribute("wishes") Wishlist wishes) {
+        wishlistService.updateWishes(wishes.getWishes());
+        return "redirect:/wishhub/sharedLink/" + wishes.getWishlistId();
     }
 
 

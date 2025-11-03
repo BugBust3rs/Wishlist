@@ -11,31 +11,41 @@
 </header>
 <div class="main-content">
     <h1 th:text="${userName} + 's ønskeliste'"></h1>
-    <form th:action="@{/wishhub/reserve}" method="post">
     <div class="wishes-container">
-        <div th:each="wish, iter : ${wishes}" class="wish">
-            <div>
-                <h2 th:text="${wish.name}"></h2>
-                <p th:text="${wish.description}"></p>
-                <p th:text="${wish.price} + ' dkk'"></p>
-                <a th:href="${wish.link}" th:text="${wish.link}"></a>
+        <form th:object="${wishlist}" th:action="@{/wishhub/reserveAll}" method="post" class="wishes-container">
+
+            <input type="hidden" th:field="*{name}">
+            <input type="hidden" th:field="*{wishlistId}">
+            <input type="hidden" th:field="*{userId}">
+            <div th:each="w,stat : *{wishes}" class="wish">
+                <div>
+                    <h2 th:text="${w.name}"></h2>
+                    <p th:text="${w.description}"></p>
+                    <p th:text="${w.price} + ' dkk'"></p>
+                    <a th:href="${w.link}" th:text="${w.link}"></a>
+                </div>
+
+                <!-- Bind each field using the index -->
+                <input type="hidden" th:field="*{wishes[__${stat.index}__].id}">
+                <input type="hidden" th:field="*{wishes[__${stat.index}__].name}">
+                <input type="hidden" th:field="*{wishes[__${stat.index}__].wishlistId}">
+                <input type="hidden" th:field="*{wishes[__${stat.index}__].description}">
+                <input type="hidden" th:field="*{wishes[__${stat.index}__].price}">
+                <input type="hidden" th:field="*{wishes[__${stat.index}__].link}">
+
+                <!-- Checkbox bound to the boolean; Thymeleaf will also emit a hidden input for false -->
+                <input type="checkbox"
+                       th:field="*{wishes[__${stat.index}__].reserved}"
+                       th:id="'wishes-' + ${w.id} + '-reserved'">
+
+                <label th:for="'wishes-' + ${w.id} + '-reserved'"
+                       th:text="${w.reserved} ? 'Reserveret' : 'Ikke reserveret'"></label>
             </div>
 
-            <input type="hidden" th:name="|wishes[${iter.index}].id|" th:value="${wish.id}">
-
-            <input type="hidden" th:name="|wishes[${iter.index}].reserved|" value="false">
-
-            <label th:for="|reserved-${iter.index}|">Reserveret</label>
-            <input
-                type="checkbox"
-                th:id="|reserved-${iter.index}|"
-                th:name="|wishes[${iter.index}].reserved|"
-                value="true"
-                th:checked="${wish.reserved}">
-        </div>
-    </div>
             <button type="submit">gem</button>
-    </form>
+        </form>
+    </div>
 </div>
 </body>
 </html>
+
