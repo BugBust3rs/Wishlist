@@ -5,27 +5,31 @@
     <title>Title</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+
+<body class="reserve-page">
 <header class="topbar">
     <a href="/wishhub/landingPage" class="header-logo">☁️ WishHub</a>
 </header>
+
 <div class="main-content">
     <h1 th:text="${userName} + 's ønskeliste'"></h1>
-    <div class="wishes-container">
-        <form th:object="${wishlist}" th:action="@{/wishhub/reserveAll}" method="post" class="wishes-container">
 
-            <input type="hidden" th:field="*{name}">
-            <input type="hidden" th:field="*{wishlistId}">
-            <input type="hidden" th:field="*{userId}">
-            <div th:each="w,stat : *{wishes}" class="wish">
-                <div>
+    <!-- Grid lives here -->
+    <form th:object="${wishlist}" th:action="@{/wishhub/reserveAll}" method="post">
+        <input type="hidden" th:field="*{name}">
+        <input type="hidden" th:field="*{wishlistId}">
+        <input type="hidden" th:field="*{userId}">
+
+        <div class="wishshow-container">
+            <div th:each="w,stat : *{wishes}" class="wishshow">
+                <div class="wish-body">
                     <h2 th:text="${w.name}"></h2>
                     <p th:text="${w.description}"></p>
                     <p th:text="${w.price} + ' dkk'"></p>
-                    <a th:href="${w.link}" th:text="${w.link}"></a>
+                    <a th:href="${w.link}" th:text="${w.link}" target="_blank" rel="noopener"></a>
                 </div>
 
-                <!-- Bind each field using the index -->
+                <!-- Bind fields -->
                 <input type="hidden" th:field="*{wishes[__${stat.index}__].id}">
                 <input type="hidden" th:field="*{wishes[__${stat.index}__].name}">
                 <input type="hidden" th:field="*{wishes[__${stat.index}__].wishlistId}">
@@ -33,19 +37,20 @@
                 <input type="hidden" th:field="*{wishes[__${stat.index}__].price}">
                 <input type="hidden" th:field="*{wishes[__${stat.index}__].link}">
 
-                <!-- Checkbox bound to the boolean; Thymeleaf will also emit a hidden input for false -->
-                <input type="checkbox"
-                       th:field="*{wishes[__${stat.index}__].reserved}"
-                       th:id="'wishes-' + ${w.id} + '-reserved'">
-
-                <label th:for="'wishes-' + ${w.id} + '-reserved'"
-                       th:text="${w.reserved} ? 'Reserveret' : 'Ikke reserveret'"></label>
+                <!-- Reserve (unchanged behavior) -->
+                <div class="reserve-row">
+                    <input type="checkbox"
+                           th:field="*{wishes[__${stat.index}__].reserved}"
+                           th:id="'wishes-' + ${w.id} + '-reserved'">
+                    <label th:for="'wishes-' + ${w.id} + '-reserved'"
+                           th:text="${w.reserved} ? 'Reserveret' : 'Ikke reserveret'"></label>
+                </div>
             </div>
 
-            <button type="submit">gem</button>
-        </form>
-    </div>
+        </div>
+        <div class="reserve-submit">
+            <button type="submit" class="copy-button">Gem</button>
+        </div>
+    </form>
 </div>
 </body>
-</html>
-

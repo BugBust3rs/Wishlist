@@ -465,6 +465,222 @@ button.rediger-button:hover { background-color: #2d6fab; }
 .wishes-container {
     grid-auto-rows: auto;
 }
+/* Ensure the wishes grid is applied to the container, not the form */
+.wishes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 30px;
+}
+
+/* Make each .wish play nicely inside the grid (keep your existing .wish look) */
+.wish {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;       /* optional: keep card heights tidy */
+}
+
+/* Checkbox + label inline, spaced a bit from content */
+.reserve-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Submit button spans the grid width and centers */
+.reserve-submit {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Optional: make long links truncate inside the card */
+.wish a {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* === Reserve page only === */
+.reserve-page .wishes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 30px;
+}
+
+/* Keep cards tidy; avoid surprise stretches from other rules */
+.reserve-page .wish {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;                 /* override any height:100% from elsewhere */
+    padding: 15px;                /* in case something stripped padding */
+    border-radius: var(--radius-xl);
+    position: relative;
+}
+
+/* Inner content block so text styles don’t collide with the reserve row */
+.reserve-page .wish .wish-body > *:not(:last-child) { margin-bottom: 6px; }
+
+/* Make long URLs behave */
+.reserve-page .wish a {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Reserve row = simple inline layout; strip fancy effects from other pages */
+.reserve-page .reserve-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    text-shadow: none;            /* neutralize text-shadows from card headers */
+}
+
+/* Keep checkbox tidy and brand-colored; works in modern browsers */
+.reserve-page .reserve-row input[type="checkbox"] {
+    margin: 0;
+    accent-color: var(--brand);
+}
+
+/* Submit button spans the grid width and centers */
+.reserve-page .reserve-submit {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Optional: tone down heading text-shadow inside cards if inherited */
+.reserve-page .wish h2,
+.reserve-page .wish p,
+.reserve-page .wish a {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* keep your card look */
+}
+
+@media (max-width: 720px) {
+    .reserve-page .wishes-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
 
 
+.wishshow {
+    background-image: url('/images/Gift.webp');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
 
+    background-color: #ffffff;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    margin: 0;
+    text-align: center;
+
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+    color: #fff;
+}
+.wishshow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.20), rgba(0,0,0,0.40));
+    z-index: 0;
+}
+.wishshow > * { position: relative; z-index: 1; }
+.wishshow h2, .wishshow p, .wishshow a { text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.wishshow a { color: #eaf6ff; }
+.wishshow a, .wishshow p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.main-content { display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+.wishshow:hover, .copy-button:hover { background-color: var(--brand-dark); }
+
+.wishshow-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-auto-rows: auto;
+    gap: 45px;
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 30px;
+    font-size: 14px;
+    justify-items: stretch; /* cards fill the column */
+    margin-bottom: 40px;
+}
+@media (max-width: 720px) {
+    .wishshow-container {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+}
+
+/* Ensure the card fills its grid column */
+.wishshow {
+    width: 100%;
+}
+/* Reserve row: label above checkbox, centered */
+.reserve-row {
+    display: flex;
+    flex-direction: column-reverse; /* label ends up above the checkbox */
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    text-shadow: none;
+}
+
+.reserve-row label {
+    margin: 0;
+    font-weight: 600;
+}
+
+.reserve-row input[type="checkbox"] {
+    margin: 0;
+    accent-color: var(--brand);
+    width: 20px;
+    height: 20px;
+}
+
+/* Centers the button under the grid */
+.reserve-submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Make the button look nice and keep width natural */
+.copy-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    background-color: var(--brand);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 6px #3b82c4;
+    transition: 0.2s;
+}
+
+.copy-button:hover {
+    background-color: var(--brand-dark);
+}
