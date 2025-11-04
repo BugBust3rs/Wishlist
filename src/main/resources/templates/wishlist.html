@@ -39,7 +39,7 @@
         <form th:action="@{/wishhub/addWish}">
             <button type="submit" class="wish-button">Tilføj et Ønske</button>
         </form>
-        <input type="hidden" id="input" th:value="'localhost:8080/wishhub/sharedLink/' + ${wishlist.getWishlistId()}">
+        <input type="hidden" id="input" th:value="'https://wishhubapp-dshsbng4gvh2fxdn.swedencentral-01.azurewebsites.net/wishhub/sharedLink/' + ${wishlist.getWishlistId()}">
         <button id="button" class="copy-button">Kopiér link</button>
     </div>
     <div class="wishes-container">
