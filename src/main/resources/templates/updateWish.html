@@ -80,9 +80,11 @@
 
         </table>
 
-        <button type="submit" class="wish-button">Opdater</button>
+        <button type="submit" class="button">Opdater</button>
     </form>
-
+    <form th:action="@{/wishhub/wishes/{wishlistId}(wishlistId=${wish.getWishlistId()})}">
+        <button type="submit" class="button">Fortryd</button>
+    </form>
 </div>
 </body>
 </html>

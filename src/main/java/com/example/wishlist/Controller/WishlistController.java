@@ -3,19 +3,12 @@ package com.example.wishlist.Controller;
 import com.example.wishlist.Model.User;
 import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Model.Wishlist;
-import com.example.wishlist.Repository.UserRepository;
-import com.example.wishlist.Model.Wishlist;
 import com.example.wishlist.Service.UserService;
 import com.example.wishlist.Service.WishlistService;
-import com.example.wishlist.exception.ApiRequestException;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -73,7 +66,6 @@ public class WishlistController {
     public String getWishes(@PathVariable int wishlistId, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         Wishlist wishlist = wishlistService.getWishlist(wishlistId);
-        // lav et tjek om user.getuserid == wishlist.getuserid, hvis det er false redirect til login
         if (!isLoggedIn(session) || user.getId() != wishlist.getUserId()) {
             return "redirect:/wishhub/login";
         }
@@ -81,7 +73,7 @@ public class WishlistController {
         user.setChosenWhislist(wishlist.getWishlistId());
         session.setAttribute("user", user);
 
-        model.addAttribute("wishlistName", wishlist.getName());
+        model.addAttribute("wishlist", wishlist);
         List<Wish> wishes = wishlistService.getWishesFromUser(wishlist.getWishlistId());
         model.addAttribute("wishes", wishes);
         return "wishlist";
@@ -109,6 +101,19 @@ public class WishlistController {
         }
         wishlistService.saveWishlist(wishlist);
         return "redirect:/wishhub/profile";
+    }
+
+    @PostMapping("/deleteWishlist/{wishlistId}")
+    public String deleteWishlist(@PathVariable int wishlistId, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Wishlist wishlist = wishlistService.getWishlist(wishlistId);
+        // lav et tjek om user.getuserid == wishlist.getuserid, hvis det er false redirect til login
+        if (!isLoggedIn(session) || user.getId() != wishlist.getUserId()) {
+            return "redirect:/wishhub/login";
+        }
+        wishlistService.deleteWishlist(wishlistId);
+        return "redirect:/wishhub/profile";
+
     }
 
 
@@ -180,27 +185,24 @@ public class WishlistController {
         return "redirect:/wishhub/wishes/" + wish.getWishlistId();
     }
 
-    @GetMapping("/sharedLink/{wishlistId}")
+    @GetMapping("sharedLink/{wishlistId}")
     public String showSharedWishlist(@PathVariable int wishlistId, Model model) {
         Wishlist wishlist = wishlistService.getWishlist(wishlistId);
         model.addAttribute("wishlistname", wishlist.getName());
         User user = userService.getUser(wishlist.getUserId());
         model.addAttribute("userName", user.getName());
         List<Wish> wishes = wishlistService.getWishesFromUser(wishlistId);
-
+        wishlist.setWishes(wishes);
         // Tilføj både listen og ønskerne til modellen
-
-        model.addAttribute("wishes", wishes);
-
-
+        model.addAttribute("wishlist", wishlist);
         return "showWishlist"; // din HTML-side
 
     }
 
-    @PostMapping("/reserve")
-    public String reserveWish(@ModelAttribute("wishes") List<Wish> wishes) {
-        int wishlistId = wishlistService.updateWishes(wishes);
-        return "redirect:/wishhub/sharedLink/" + wishlistId;
+    @PostMapping("reserveAll")
+    public String reserveAll(@ModelAttribute("wishes") Wishlist wishes) {
+        wishlistService.updateWishes(wishes.getWishes());
+        return "redirect:/wishhub/sharedLink/" + wishes.getWishlistId();
     }
 
 

@@ -6,12 +6,21 @@
     <link rel="stylesheet" href="/css/style.css">
     <style>
         @keyframes floatLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-200px); }
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-200px);
+            }
         }
+
         @keyframes floatRight {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(200px); }
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(200px);
+            }
         }
     </style>
 </head>
@@ -22,40 +31,24 @@
         <button type="submit" class="logout-button">Log ud</button>
     </form>
 </header>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const cloudContainer = document.querySelector(".emoji-clouds");
-        for (let i = 0; i < 20; i++) {
-            const cloud = document.createElement("div");
-            cloud.textContent = "☁️";
-            cloud.style.position = "absolute";
-            cloud.style.fontSize = `${Math.random() * 4 + 2}rem`;
-            cloud.style.top = `${Math.random() * 100}%`;
-            cloud.style.left = `${Math.random() * 100}%`;
-            cloud.style.opacity = Math.random() * 0.4 + 0.1;
-            const dir = (i % 2) ? 'Left' : 'Right';
-            cloud.style.animation = 'float' + dir + ' ' + (80 + Math.random()*60) + 's linear infinite';
-            cloudContainer.appendChild(cloud);
-        }
-    });
-</script>
-
 <div class="emoji-clouds"></div>
-
-
 <div class="main-content">
-    <h1 th:text="${wishlistName}"></h1>
-    <form th:action="@{/wishhub/addWish}">
-        <button type="submit" class="wish-button">Tilføj et Ønske</button>
-    </form>
+    <h1 th:text="${wishlist.name}"></h1>
 
+    <div class="action-bar">
+        <form th:action="@{/wishhub/addWish}">
+            <button type="submit" class="wish-button">Tilføj et Ønske</button>
+        </form>
+        <input type="hidden" id="input" th:value="'localhost:8080/wishhub/sharedLink/' + ${wishlist.getWishlistId()}">
+        <button id="button" class="copy-button">Kopiér link</button>
+    </div>
     <div class="wishes-container">
         <div th:each="wish : ${wishes}" class="wish">
             <div>
                 <h2 th:text="${wish.name}"></h2>
                 <p th:text="${wish.description}"></p>
                 <p th:text="${wish.price} + ' dkk'"></p>
-                <a th:href="${wish.link}" th:text="${wish.link}"></a>
+                <a th:href="${wish.link}" target="_blank" th:text="${wish.link}"></a>
             </div>
             <div class="button-group">
                 <form th:action="@{/wishhub/deleteWish/{wishId}(wishId=${wish.id})}" method="post">
@@ -68,5 +61,32 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cloudContainer = document.querySelector(".emoji-clouds");
+        for (let i = 0; i < 20; i++) {
+            const cloud = document.createElement("div");
+            cloud.textContent = "☁️";
+            cloud.style.position = "absolute";
+            cloud.style.fontSize = `${Math.random() * 4 + 2}rem`;
+            cloud.style.top = `${Math.random() * 100}%`;
+            cloud.style.left = `${Math.random() * 100}%`;
+            cloud.style.opacity = Math.random() * 0.4 + 0.1;
+            const dir = (i % 2) ? 'Left' : 'Right';
+            cloud.style.animation = 'float' + dir + ' ' + (80 + Math.random() * 60) + 's linear infinite';
+            cloudContainer.appendChild(cloud);
+        }
+    });
+
+    var btn = document.getElementById("button")
+    console.log(btn)
+    var input = document.getElementById("input")
+    console.log(input)
+    btn.onclick = () => {
+        var text = input.value
+        console.log('text', text)
+        navigator.clipboard.writeText(text)
+    }
+</script>
 </body>
 </html>

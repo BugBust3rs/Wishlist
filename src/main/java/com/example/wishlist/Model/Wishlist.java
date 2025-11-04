@@ -4,14 +4,14 @@ package com.example.wishlist.Model;
 import java.util.List;
 
 public class Wishlist {
-    private List<Wish> wishlist;
+    private List<Wish> wishes;
     private String name;
     private int userId;
     private int wishlistId;
 
 
-    public Wishlist(List<Wish> wishList, String name, int userId){
-        this.wishlist = wishList;
+    public Wishlist(List<Wish> wishes, String name, int userId){
+        this.wishes = wishes;
         this.name = name;
         this.userId = userId;
     }
@@ -20,8 +20,8 @@ public class Wishlist {
 
     }
 
-    public List<Wish> getWishlist() {
-        return wishlist;
+    public List<Wish> getWishes() {
+        return wishes;
     }
 
     public void setWishlistId(int wishlistId) {
@@ -32,8 +32,8 @@ public class Wishlist {
         return wishlistId;
     }
 
-    public void setWishlist(List<Wish> wishlist) {
-        this.wishlist = wishlist;
+    public void setWishes(List<Wish> wishes) {
+        this.wishes = wishes;
     }
 
     public String getName() {
