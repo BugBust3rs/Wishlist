@@ -1,5 +1,4 @@
 package com.example.wishlist.Controller;
-
 import com.example.wishlist.exception.ApiException;
 import com.example.wishlist.exception.ApiRequestException;
 import com.example.wishlist.exception.DatabaseOperationException;
@@ -8,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 

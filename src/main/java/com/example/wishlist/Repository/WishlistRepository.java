@@ -1,6 +1,4 @@
 package com.example.wishlist.Repository;
-
-import com.example.wishlist.Model.Wish;
 import com.example.wishlist.Model.Wishlist;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -42,8 +40,8 @@ public class WishlistRepository {
 
     public void updateWishlist(Wishlist wishlist){
         String sql = """
-                UPDATE Wishlists 
-                SET name = ?, 
+                UPDATE Wishlists
+                SET name = ?,
                 user_id = ?
                 WHERE wishlist_id = ?
                 """;

@@ -1,9 +1,5 @@
 package com.example.wishlist.exception;
 
-import org.springframework.http.HttpStatus;
-
-import java.time.ZonedDateTime;
-
 public class ApiRequestException extends RuntimeException{
 
 

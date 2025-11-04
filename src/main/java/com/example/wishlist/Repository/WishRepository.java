@@ -49,12 +49,12 @@ public class WishRepository {
     }
     public void updateWish(Wish wish){
         String sql = """
-                UPDATE Wish 
-                SET name = ?, 
-                description = ?,  
-                price = ?, 
-                link = ?, 
-                isReserved = ? 
+                UPDATE Wish
+                SET name = ?,
+                description = ?,
+                price = ?,
+                link = ?,
+                isReserved = ?
                 WHERE wish_id = ?
                 """;
         jdbcTemplate.update(sql,
